@@ -1,0 +1,259 @@
+/* Home Populars */
+.container-populars {
+    margin: 0 auto;
+    padding: 20px 80px;
+    overflow-x: hidden;
+}
+
+/* Línea superior */
+.container-populars::before {
+    content: "";
+    display: block;
+    width: 1200px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 auto 20px;
+}
+
+/* Línea inferior */
+.container-populars::after {
+    content: "";
+    display: block;
+    width: 1200px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px auto 0;
+}
+
+/* Títulos y subtítulos */
+.home-populars-texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    margin-bottom: 35px;
+}
+
+.home-populars-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 25px;
+}
+
+.home-populars-subtitle {
+    font-size: 18px;
+    color: black;
+    max-width: 700px;
+    font-weight: 300;
+}
+
+/* Carrusel */
+.carousel-multiple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.carousel-item {
+    position: relative;
+    width: 250px;
+    height: 310px;
+    border-radius: 5px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Contenedor Recetas */
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.recipe-image1 {
+    position: relative;
+    height: 185px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Texto Receta */
+.recipe-info {
+    text-align: left;
+}
+
+.carousel-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.carousel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: #A8A8A8;
+}
+
+.carousel-meta span {
+    display: flex;
+    align-items: center;
+    color: #A8A8A8;
+}
+
+.carousel-meta i {
+    margin: 5px;
+    font-size: 18px;
+}
+
+/* Edición de los botones */
+.save-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.save-btn i {
+    font-size: 20px;
+    color: #A8A8A8;
+}
+
+.save-btn.saved i {
+    color: #ff5722;
+}
+
+.details-button {
+    background-color: #f5c855;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+}
+
+.details-button:hover {
+    background-color: #e3b645;
+}
+
+/* Botones navegación carrusel */
+.carousel-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    color: #565656;
+}
+
+.carousel-btn:hover {
+    color: #f5c855;
+}
+
+.carousel-btn:disabled {
+    cursor: not-allowed;
+    color: #A8A8A8;
+}
+
+
+/* Estilos para el mensaje de login que aparece en la parte inferior */
+.login-message {
+    position: fixed;
+    bottom: -100px; /* Comienza fuera de la vista, en la parte inferior */
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho de la página */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 0; /* Eliminamos las esquinas redondeadas */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0; /* Inicialmente invisible */
+    animation: slideUp 0.5s ease-out forwards; /* Añadimos la animación */
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle más estilo */
+}
+
+/* Definir la animación */
+@keyframes slideUp {
+    0% {
+        bottom: -100px; /* El mensaje comienza fuera de la vista */
+        opacity: 0; /* Invisible */
+    }
+    100% {
+        bottom: 0; /* Posición final en la parte inferior de la página */
+        opacity: 1; /* Totalmente visible */
+    }
+}
+
+/* Contenedor para los botones */
+.login-message .button-container {
+    display: flex; /* Coloca los botones uno al lado del otro */
+    gap: 10px; /* Espaciado entre botones */
+    margin-top: 10px;
+}
+
+/* Botón de inicio de sesión */
+.login-message .login-button {
+    padding: 8px 35px;
+    background-color: #FCCA36;
+    color: black;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.login-message .login-button:hover {
+    background-color: #e3b645;
+    font-weight: 500;
+}
+
+/* Botón de cerrar */
+.login-message .close-button {
+    padding: 8px 35px;
+    background-color: none;
+    border-color: #ccc;
+    color: black;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.login-message .close-button:hover {
+    background-color: #ccc;
+}
+
+

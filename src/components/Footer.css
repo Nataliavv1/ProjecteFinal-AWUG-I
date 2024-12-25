@@ -1,0 +1,67 @@
+/* Estilo global para todo el documento */
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    padding: 20px 121px;
+    box-sizing: border-box;
+  }
+  
+  /* Footer */
+  footer {
+    width: 100vw;
+    background-color: rgba(252, 202, 54, 0.1);
+    padding: 20px;
+    text-align: center;
+    color: black;
+    position: relative;
+    left: calc(-1 * 121px);
+  }
+  
+  /* Logo en el footer */
+  .footer-logo {
+    margin-bottom: 43px;
+    margin-top: 50px;
+  }
+
+  .footer-logo-image {
+    width: 100px;
+    height: auto;
+  }
+
+  
+  /* Navegación dentro del footer */
+  .footer-link {
+    text-decoration: none;
+    font-size:15px;
+    color: black;
+    font-weight: 300;
+    transition: color 0.3s;
+    margin: 25px;
+    text-transform: uppercase;
+  }
+
+  .footer-link:hover {
+   color: #e3b645;
+  }
+  
+
+  /* Texto adicional del footer */
+  footer .footer-text {
+    font-size: 12px;
+    color: black;
+    line-height: 15px;
+    margin-bottom: 50px;
+  }
+
+  .footer-line {
+    border: 0;
+    border-top: 1px solid #ccc; /* Líneas grises */
+    margin: 50px auto; /* Espaciado antes y después de la línea, y centrado */
+    width: 100%; /* Asegura que la línea ocupe todo el espacio disponible */
+    max-width: 1200px; /* Limita el ancho máximo a 1200px */
+}
+

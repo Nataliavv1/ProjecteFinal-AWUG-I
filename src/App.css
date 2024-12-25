@@ -1,0 +1,11 @@
+/* Estilo global para todo el documento */
+body {
+  margin: 0;
+  padding: 20px 121px 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Si quieres un padding general, pero con más control en otras partes */
+* {
+  box-sizing: border-box;
+}

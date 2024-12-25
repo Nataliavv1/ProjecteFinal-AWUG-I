@@ -1,0 +1,280 @@
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  color: white;
+  /*padding: 20px 121px;*/
+  position: sticky;
+  top: 0; /* Fija el header en la parte superior */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  margin-top: 20px;
+}
+
+
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.App-logo {
+  width: 100px;
+  height: auto;
+  margin-right: 55px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 443px;
+}
+
+.dropdown {
+  width: 115px;
+  height: 43px;
+  padding: 10px 15px;
+  font-size: 12px;
+  background-color: #F4F4F4;
+  border: 1px solid #ccc;
+  border-radius: 0px 0 0 0px;
+  color: #000000;
+}
+
+.input {
+  min-height: 43px;
+  flex: 1;
+  padding: 0 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.button--submit {
+  height: 43px;
+  width: 43px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 0 0px 0px 0;
+  background-color: #FCCA36;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button--submit:hover {
+  background-color: #e3b645;
+}
+
+/*Modificamos el icono de search*/
+/* Asegúrate de que el ícono dentro de button--submit tenga los estilos correctos */
+.custom-icon {
+  font-size: 10px;
+  color: white;
+  font-weight: 100;
+}
+
+/* Hover sobre el ícono dentro del botón */
+.button--submit:hover i.custom-icon {
+  font-size: 10px;
+  color: #ccc;
+}
+
+/*Perfil (Log in, Log out y perfil usuario), favoritos, recetario (carrito)*/
+.user-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 202px;
+}
+
+.user-actions > *:not(:first-child) {
+  margin-left: 20px;
+}
+
+/* Botón carrito */
+.cart-button {
+  background-color: #FCCA36;
+  border: none;
+  padding: 20px 15px;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 43px;
+  gap: 10px;
+  font-size: 15px;
+}
+
+/* Estilo para el icono dentro del botón */
+.cart-button i {
+  font-size: 22px; /* Tamaño más grande del icono */
+}
+
+/* Estilo para el texto dentro del botón */
+.cart-button .cart-text {
+  font-size: 14px; /* Tamaño del texto */
+}
+
+/* Hover del botón carrito */
+.cart-button:hover {
+  background-color: #e3b645;
+}
+
+
+
+/*Botón de favoritos*/
+.favorite-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px;
+  color: black;
+  cursor: pointer;
+  font-size: 23px;
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover del botón de favoritos sin fondo */
+.favorite-button:hover {
+  background-color: transparent;
+  color: #f5c855;
+}
+
+/*Menú horizontal*/
+/*Menú horizontal*/
+.navigation {
+  margin: 0 121px; /* Aplica margen igual al del logo */
+  width: 100%; /* No es necesario usar calc aquí */
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start; /* Cambiado de center a flex-start */
+}
+
+.navigation ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.navigation ul li a:hover {
+  border-bottom: 3px solid #f5c855;
+  padding-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Estilos para los enlaces activos en el menú */
+.navigation ul li a.active {
+  border-bottom: 3px solid #f5c855; /* El mismo estilo que el hover */
+  padding-bottom: 5px;
+  font-weight: 600; /* Negrita */
+  color: #000000; /* Puedes cambiar el color si es necesario */
+}
+
+
+/* Estilos para los botones de Log In y Log Out */
+.login-button,
+.logout-button {
+  background-color: transparent;
+  border: none;
+  padding: 15px 20px;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50px; /* Bordes redondeados */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 43px;
+  gap: 12px; /* Ajustado para mejor alineación */
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Estilo para el icono dentro de los botones */
+.login-button i,
+.logout-button i {
+  font-size: 20px; /* Tamaño más pequeño y equilibrado */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Estilo para el texto dentro de los botones */
+.login-button .login-text,
+.logout-button .logout-text {
+  font-size: 14px; /* Tamaño de texto */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover de los botones */
+.login-button:hover,
+.logout-button:hover {
+  color: #f5c855;
+  background-color: #fff3c1;
+  border-radius: 0px;
+}
+
+/* Estilo para el perfil que funciona como botón */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+  padding: 5px 15px;
+  border-radius: 0px;
+}
+
+/* Estilo para la imagen del perfil redonda */
+.profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Estilo para el texto del perfil */
+.profile h2 {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Estilo para el texto adicional (como el email) */
+.profile p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Efecto hover para hacer clic en el perfil */
+.profile:hover {
+  background-color: #fff3c1;
+  padding: 5px 15px;
+  border-radius: 0px;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Estilo para el texto cuando se hace hover */
+.profile:hover h2 {
+  color: #f5c855;
+  border-radius: 0px;
+}
+

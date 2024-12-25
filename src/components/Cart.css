@@ -1,0 +1,66 @@
+.cart-container {
+    padding: 20px;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.recipe-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.recipe-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.recipe-details {
+    flex-grow: 1;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.servings-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.collapsible-section h4 {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    margin: 15px 0 5px;
+}
+
+.ingredients-list,
+.steps-list {
+    margin: 0;
+    padding-left: 20px;
+}

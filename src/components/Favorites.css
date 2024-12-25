@@ -1,0 +1,98 @@
+.favorites-container {
+    display: flex;
+    flex-direction: column; /* Asegura que cada receta esté en una nueva línea */
+    gap: 20px;
+}
+
+.favorite-item {
+    display: flex; /* Utilizamos flexbox para organizar los elementos en línea */
+    align-items: center; /* Alinea los elementos verticalmente */
+    justify-content: space-between; /* Separa los elementos con espacio entre ellos */
+    border-bottom: 1px solid #ddd; /* Línea en la parte inferior */
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.favorite-image {
+    width: 250px; /* Hace la imagen cuadrada */
+    height: 250px; /* Mantiene la imagen cuadrada */
+    object-fit: cover; /* Asegura que la imagen cubra todo el área sin distorsión */
+    border-radius: 5px; /* Bordes redondeados para la imagen */
+}
+
+.favorite-info {
+    flex-grow: 1; /* Hace que el título y el tiempo ocupen el espacio disponible */
+    margin-left: 20px; /* Espacio entre la imagen y el título/tiempo */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    gap: 5px; /* Espacio entre los elementos */
+}
+
+.favorite-info h3 {
+    margin: 0; /* Elimina el margen del título */
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.favorite-info h4 {
+    margin: 0; /* Elimina el margen del tiempo */
+    font-size: 14px;
+    font-weight: 400;
+    color: black; /* Color gris para el tiempo */
+    margin-bottom: 20px;
+}
+
+.favorite-info p {
+    margin: 0; /* Elimina los márgenes */
+    font-size: 14px;
+    color: black;
+    max-width: calc(100% - 120px); /* Ajuste el max-width para dejar espacio para los botones */
+    text-align: justify; /* Justifica el texto a ambos lados */
+    line-height: 1.6; /* Añade espacio entre líneas */
+    overflow: hidden; /* Si el texto es largo, se corta */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto se desborda */
+}
+
+
+.favorite-buttons {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    flex-shrink: 0; /* Evita que los botones se reduzcan */
+}
+
+.favorite-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Tamaño fijo para los botones */
+    height: 40px; /* Tamaño fijo para los botones */
+    border-radius: 5px; /* Botones redondos */
+    font-size: 20px; /* Tamaño del ícono */
+    cursor: pointer;
+    border: none; /* Sin borde por defecto */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+/* Botón de eliminar (trash) */
+.favorite-buttons button:first-child {
+    background-color: transparent; /* Fondo transparente */
+    border: 2px solid #ccc; /* Borde rojo */
+    color: #ccc; /* Ícono rojo */
+}
+
+.favorite-buttons button:first-child:hover {
+    background-color: #ccc; /* Fondo rojo al pasar el mouse */
+    color: white; /* Ícono blanco al pasar el mouse */
+}
+
+/* Botón de agregar (plus) */
+.favorite-buttons button:last-child {
+    background-color: #FCCA36; /* Fondo verde */
+    color: white; /* Ícono blanco */
+    font-size: 25px;
+}
+
+.favorite-buttons button:last-child:hover {
+    background-color: #e3b645; /* Fondo verde más oscuro */
+}
