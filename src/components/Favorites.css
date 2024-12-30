@@ -1,98 +1,134 @@
 .favorites-container {
     display: flex;
-    flex-direction: column; /* Asegura que cada receta esté en una nueva línea */
+    flex-direction: column; /* Cada receta en una nueva línea */
     gap: 20px;
 }
 
 .favorite-item {
-    display: flex; /* Utilizamos flexbox para organizar los elementos en línea */
-    align-items: center; /* Alinea los elementos verticalmente */
-    justify-content: space-between; /* Separa los elementos con espacio entre ellos */
-    border-bottom: 1px solid #ddd; /* Línea en la parte inferior */
+    display: flex; /* Organiza los elementos en línea */
+    align-items: flex-start; /* Alinea al inicio verticalmente */
+    justify-content: space-between; /* Espacio entre los elementos */
+    border-bottom: 1px solid #ddd; /* Línea inferior */
     padding: 10px;
     background-color: #fff;
     border-radius: 8px;
+    position: relative; /* Para posicionar elementos hijos dentro del contenedor */
 }
 
 .favorite-image {
-    width: 250px; /* Hace la imagen cuadrada */
-    height: 250px; /* Mantiene la imagen cuadrada */
-    object-fit: cover; /* Asegura que la imagen cubra todo el área sin distorsión */
-    border-radius: 5px; /* Bordes redondeados para la imagen */
+    width: 250px;
+    height: 250px;
+    object-fit: cover; /* Ajusta la imagen sin distorsión */
+    border-radius: 5px;
+    position: sticky; /* La imagen permanece fija */
+    top: 10px; /* Distancia desde la parte superior */
 }
 
 .favorite-info {
-    flex-grow: 1; /* Hace que el título y el tiempo ocupen el espacio disponible */
-    margin-left: 20px; /* Espacio entre la imagen y el título/tiempo */
+    flex-grow: 1; /* El título, tiempo, descripción ocupan el espacio disponible */
+    margin-left: 20px; /* Espacio entre la imagen y el contenido */
+    margin-right: 20px; /* Margen a la derecha para separar de los botones */
     display: flex;
-    flex-direction: column; /* Organiza los elementos en columna */
-    gap: 5px; /* Espacio entre los elementos */
+    flex-direction: column;
+    gap: 15px; /* Espacio entre título, descripción e ingredientes */
 }
 
 .favorite-info h3 {
-    margin: 0; /* Elimina el margen del título */
+    margin: 0;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
 .favorite-info h4 {
-    margin: 0; /* Elimina el margen del tiempo */
+    margin: 0;
     font-size: 14px;
     font-weight: 400;
-    color: black; /* Color gris para el tiempo */
-    margin-bottom: 20px;
+    color: black;
+    margin-bottom: 10px;
 }
 
 .favorite-info p {
-    margin: 0; /* Elimina los márgenes */
+    margin: 0;
     font-size: 14px;
     color: black;
-    max-width: calc(100% - 120px); /* Ajuste el max-width para dejar espacio para los botones */
-    text-align: justify; /* Justifica el texto a ambos lados */
-    line-height: 1.6; /* Añade espacio entre líneas */
-    overflow: hidden; /* Si el texto es largo, se corta */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto se desborda */
+    text-align: justify;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+.ingredients-list {
+    margin: 10px 0 0 0; /* Margen superior */
+    padding: 0;
+    list-style-type: none; /* Sin viñetas */
+    font-size: 14px;
+    color: black;
+    max-width: 100%; /* Ajusta al ancho de la descripción */
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* Espaciado adicional entre descripción e ingredientes */
+.favorite-info .ingredients-list {
+    margin-top: 10px; /* Separación entre descripción e ingredientes */
+}
 
 .favorite-buttons {
-    display: flex;
-    gap: 10px; /* Espacio entre los botones */
-    flex-shrink: 0; /* Evita que los botones se reduzcan */
+    display: flex; /* Los botones se colocan en una fila */
+    gap: 10px; /* Espacio entre botones */
+    position: sticky; /* Botones permanecen fijos */
+    top: 10px; /* Misma distancia que la imagen */
+    align-items: center; /* Alineación vertical */
 }
 
 .favorite-buttons button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; /* Tamaño fijo para los botones */
-    height: 40px; /* Tamaño fijo para los botones */
-    border-radius: 5px; /* Botones redondos */
-    font-size: 20px; /* Tamaño del ícono */
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
     cursor: pointer;
-    border: none; /* Sin borde por defecto */
-    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Botón de eliminar (trash) */
+/* Botón de eliminar */
 .favorite-buttons button:first-child {
-    background-color: transparent; /* Fondo transparente */
-    border: 2px solid #ccc; /* Borde rojo */
-    color: #ccc; /* Ícono rojo */
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #ccc;
 }
 
 .favorite-buttons button:first-child:hover {
-    background-color: #ccc; /* Fondo rojo al pasar el mouse */
-    color: white; /* Ícono blanco al pasar el mouse */
+    background-color: #ccc;
+    color: white;
 }
 
-/* Botón de agregar (plus) */
+/* Botón de agregar */
 .favorite-buttons button:last-child {
-    background-color: #FCCA36; /* Fondo verde */
-    color: white; /* Ícono blanco */
+    background-color: #FCCA36;
+    color: white;
     font-size: 25px;
 }
 
 .favorite-buttons button:last-child:hover {
-    background-color: #e3b645; /* Fondo verde más oscuro */
+    background-color: #e3b645;
+}
+
+.collapsible-section h5 {
+    display: flex; /* Activa Flexbox */
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: space-between; /* Distribuye el texto y el ícono */
+    margin: 0; /* Elimina márgenes */
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: 600; /* Peso del texto */
+    color: black; /* Color del texto */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.collapsible-section h5 i {
+    margin-left: 10px; /* Espaciado entre el texto y el ícono */
+    cursor: pointer; /* Cambia el cursor a mano para indicar que es interactivo */
 }
