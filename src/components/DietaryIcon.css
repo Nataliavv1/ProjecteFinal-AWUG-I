@@ -1,0 +1,19 @@
+.dietary-icon {
+    display: inline-flex; /* Cambia de flex a inline-flex para mantenerlos en línea */
+    align-items: center;
+    margin: 5px;
+  }
+  
+  .icon-image {
+    width: 80px;
+    height: auto;
+    margin-right: 8px;
+  }
+  
+  .dietary-icons {
+    display: flex; /* Asegura que los íconos se dispongan en fila */
+    flex-wrap: wrap; /* Permite que se pasen a la siguiente fila si no caben */
+    justify-content: center; /* Centra los íconos horizontalmente */
+    gap: 10px; /* Espaciado entre los íconos */
+  }
+  
