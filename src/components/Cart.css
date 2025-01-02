@@ -161,11 +161,24 @@
     border: 1px solid transparent;
 }
 
+/* Estilo de los botones con tamaño 40px x 40px */
+.icon-button.delete,
+.icon-button.favorite {
+    width: 40px;
+    height: 40px;
+    font-size: 20px; /* Tamaño de los íconos */
+    padding: 0; /* Elimina el padding para que se ajuste al tamaño */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Redondea los bordes del botón */
+    transition: background-color 0.3s;
+}
+
 .icon-button.delete {
     background-color: transparent;
     border: 2px solid #ccc;
     color: #ccc;
-    font-size: 25px;
 }
 
 .icon-button.delete:hover {
@@ -177,11 +190,14 @@
 .icon-button.favorite {
     background-color: #fcca36;
     color: white;
-    font-size: 25px;
 }
 
 .icon-button.favorite:hover {
     background-color: #e3b645;
+}
+
+.icon-button i {
+    font-size: 20px; /* Ajusta el tamaño del ícono */
 }
 
 .icon-button.default {
@@ -192,8 +208,4 @@
 .icon-button.default:hover {
     background-color: #e0e0e0;
     border-color: #ccc;
-}
-
-.icon-button i {
-    font-size: 22px;
 }

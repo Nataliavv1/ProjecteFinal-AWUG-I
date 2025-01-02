@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 import { useCart } from "../components/CartContext";
 import { useFavorites } from "../components/FavoritesContext";
 import "./Cart.css";
@@ -12,6 +13,7 @@ const Cart = () => {
     const [steps, setSteps] = useState({});
     const [expand, setExpand] = useState({});
     const [readyTimes, setReadyTimes] = useState({});
+    const navigate = useNavigate(); // Hook para la navegación
     const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
 
     const fetchIngredientsForServings = async (recipeId, numberOfServings) => {
@@ -123,6 +125,11 @@ const Cart = () => {
         });
     }, [cart]);
 
+    // Función para navegar a los detalles de la receta
+    const goToRecipeDetails = (recipeId) => {
+        navigate(`/recipe/${recipeId}`, { state: { fromCart: true } }); // Pasamos el estado desde el carrito
+    };
+
     return (
         <div className="cart-container">
             <h1>Your Cart</h1>
@@ -131,7 +138,11 @@ const Cart = () => {
             ) : (
                 <ul className="cart-list">
                     {cart.map((recipe) => (
-                        <li key={recipe.id} className="cart-item">
+                        <li
+                            key={recipe.id}
+                            className="cart-item"
+                            onClick={() => goToRecipeDetails(recipe.id)} // Navegar al hacer clic en todo el contenedor
+                        >
                             <div className="recipe-header">
                                 <img src={recipe.image} alt={recipe.title} className="recipe-image" />
                                 <div className="recipe-details">
@@ -139,29 +150,47 @@ const Cart = () => {
                                         <h3>{recipe.title}</h3>
                                         <div className="action-buttons">
                                             <button
-                                                onClick={() => removeFromCart(recipe.id)}
-                                                className="icon-button delete" // Clases agregadas
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    removeFromCart(recipe.id);
+                                                }}
+                                                className="icon-button delete"
                                                 aria-label="Remove from cart"
                                             >
                                                 <i className="bx bx-trash"></i>
                                             </button>
                                             <button
-                                                onClick={() => addFavorite(recipe)}
-                                                className="icon-button favorite" // Clases agregadas
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    addFavorite(recipe);
+                                                }}
+                                                className="icon-button favorite"
                                                 aria-label="Save to favorites"
                                             >
                                                 <i className="bx bx-heart"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <h4><i className="bx bx-time-five"></i>{recipe.readyInMinutes} minutes</h4>
+                                    <h4>
+                                        <i className="bx bx-time-five"></i>
+                                        {recipe.readyInMinutes} minutes
+                                    </h4>
                                     <div className="servings-control">
-                                        <button onClick={() => handleServingsChange(recipe.id, -1)} disabled={servings[recipe.id] === 1}>-</button>
+                                        <button onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleServingsChange(recipe.id, -1);
+                                        }} disabled={servings[recipe.id] === 1}>-</button>
                                         <span>Servings: {servings[recipe.id] || 1}</span>
-                                        <button onClick={() => handleServingsChange(recipe.id, 1)}>+</button>
+                                        <button onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleServingsChange(recipe.id, 1);
+                                        }}>+</button>
                                     </div>
                                     <div className="collapsible-section">
-                                        <h4 onClick={() => toggleExpand(recipe.id, "ingredients")}>
+                                        <h4 onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleExpand(recipe.id, "ingredients");
+                                        }}>
                                             Ingredients
                                             <i className={`bx ${expand[recipe.id]?.ingredients ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
                                         </h4>
@@ -172,7 +201,10 @@ const Cart = () => {
                                                         <input
                                                             type="checkbox"
                                                             checked={purchasedIngredients[recipe.id]?.[index] || false}
-                                                            onChange={() => toggleIngredientPurchased(recipe.id, index)}
+                                                            onChange={(e) => {
+                                                                e.stopPropagation();
+                                                                toggleIngredientPurchased(recipe.id, index);
+                                                            }}
                                                         />
                                                         {ingredient.amount.toFixed(1)} {ingredient.unit} {ingredient.name}
                                                     </li>
@@ -181,7 +213,10 @@ const Cart = () => {
                                         )}
                                     </div>
                                     <div className="collapsible-section">
-                                        <h4 onClick={() => toggleExpand(recipe.id, "steps")}>
+                                        <h4 onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleExpand(recipe.id, "steps");
+                                        }}>
                                             Steps
                                             <i className={`bx ${expand[recipe.id]?.steps ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
                                         </h4>

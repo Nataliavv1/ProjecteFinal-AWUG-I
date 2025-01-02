@@ -98,8 +98,10 @@ function HomeDetails() {
 
     // Función para manejar el botón de "Back"
     const handleBackButtonClick = () => {
-        // Verificamos si estamos regresando desde la página de "Favorites"
-        if (location.state?.fromFavorites) {
+        // Verificamos si estamos regresando desde la página de "Favorites" o "Cart"
+        if (location.state?.fromCart) {
+            navigate("/cart"); // Si venimos del carrito, redirigimos allí
+        } else if (location.state?.fromFavorites) {
             navigate("/favorites"); // Si venimos de la página de Favorites, redirigimos allí
         } else {
             navigate("/"); // Si no, redirigimos a la página de inicio
@@ -257,3 +259,4 @@ function HomeDetails() {
 }
 
 export default HomeDetails;
+
