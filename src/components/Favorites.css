@@ -13,6 +13,12 @@
     background-color: #fff;
     border-radius: 8px;
     position: relative; /* Para posicionar elementos hijos dentro del contenedor */
+    cursor: pointer; /* Cursor de mano para indicar que es interactivo */
+    transition: background-color 0.3s ease; /* Efecto de transición para el fondo */
+}
+
+.favorite-item:hover {
+    background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
 }
 
 .favorite-image {
@@ -20,8 +26,6 @@
     height: 250px;
     object-fit: cover; /* Ajusta la imagen sin distorsión */
     border-radius: 5px;
-    position: sticky; /* La imagen permanece fija */
-    top: 10px; /* Distancia desde la parte superior */
 }
 
 .favorite-info {
@@ -31,6 +35,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px; /* Espacio entre título, descripción e ingredientes */
+    transition: background-color 0.3s ease; /* Efecto de transición para el fondo */
 }
 
 .favorite-info h3 {
@@ -57,6 +62,11 @@
     text-overflow: ellipsis;
 }
 
+/* Detalles expandido */
+.favorite-info.expanded {
+    background-color: #f9f9f9; /* Fondo gris claro cuando está expandido */
+}
+
 .ingredients-list {
     margin: 10px 0 0 0; /* Margen superior */
     padding: 0;
@@ -76,8 +86,6 @@
 .favorite-buttons {
     display: flex; /* Los botones se colocan en una fila */
     gap: 10px; /* Espacio entre botones */
-    position: sticky; /* Botones permanecen fijos */
-    top: 10px; /* Misma distancia que la imagen */
     align-items: center; /* Alineación vertical */
 }
 
@@ -115,20 +123,4 @@
 
 .favorite-buttons button:last-child:hover {
     background-color: #e3b645;
-}
-
-.collapsible-section h5 {
-    display: flex; /* Activa Flexbox */
-    align-items: center; /* Centra verticalmente el contenido */
-    justify-content: space-between; /* Distribuye el texto y el ícono */
-    margin: 0; /* Elimina márgenes */
-    font-size: 14px; /* Tamaño del texto */
-    font-weight: 600; /* Peso del texto */
-    color: black; /* Color del texto */
-    margin-bottom: 10px; /* Espaciado inferior */
-}
-
-.collapsible-section h5 i {
-    margin-left: 10px; /* Espaciado entre el texto y el ícono */
-    cursor: pointer; /* Cambia el cursor a mano para indicar que es interactivo */
 }

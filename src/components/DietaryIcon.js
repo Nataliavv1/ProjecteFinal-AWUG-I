@@ -8,7 +8,7 @@ import pescatarian from "../icons/contains_fish.png"; // FET
 import ketogenic from "../icons/keto.png"; // FET
 import paleo from "../icons/paleo.png"; // FET
 import primal from "../icons/primal.png"; // FET
-/*import whole30 from "../icons/whole30.png";*/ // Ícono comentado porque falta el archivo
+import whole30 from "../icons/whole30.png"; // FET
 import lowCarb from "../icons/low_carb.png"; // FET
 import lowFat from "../icons/low_fat.png"; // FET
 import sugarConscious from "../icons/sugar_conscious.png"; // FET
@@ -17,7 +17,7 @@ import sugarConscious from "../icons/sugar_conscious.png"; // FET
 import glutenFree from "../icons/gluten_free.png"; // FET
 import eggFree from "../icons/egg_free.png"; // FET
 import peanutFree from "../icons/no_nuts.png"; // FET
-/*import treeNutFree from "../icons/tree-nut-free.png";*/ // Ícono comentado porque falta el archivo
+import treeNutFree from "../icons/treenuts_free.png"; // FET
 import soyFree from "../icons/soy_free.png"; // FET
 import fishFree from "../icons/fish_free.png"; // FET
 import wheatFree from "../icons/wheat_free.png"; // FET
@@ -29,7 +29,7 @@ import lupinFree from "../icons/lupin_free.png"; // FET
 import molluskFree from "../icons/mollusk_free.png"; // FET
 
 // Ícono genérico
-/*import defaultIcon from "../icons/default.png";*/ // Ícono comentado porque falta el archivo
+import defaultIcon from "../icons/default.png"; // FET
 
 // Objeto de íconos con claves normalizadas
 const dietaryIcons = {
@@ -39,7 +39,7 @@ const dietaryIcons = {
   ketogenic,
   paleo,
   primal,
-  /*whole30,*/ // Ícono comentado porque falta el archivo
+  whole30,
   lowcarb: lowCarb,
   lowfat: lowFat,
   sugarconscious: sugarConscious,
@@ -48,7 +48,7 @@ const dietaryIcons = {
   glutenfree: glutenFree,
   eggfree: eggFree,
   peanutfree: peanutFree,
-  /*treenutfree,*/ // Ícono comentado porque falta el archivo
+  treeNutFree,
   soyfree: soyFree,
   fishfree: fishFree,
   wheatfree: wheatFree,
@@ -60,7 +60,7 @@ const dietaryIcons = {
   molluskfree: molluskFree,
 
   // Ícono genérico
-  /*default: defaultIcon,*/ // Ícono comentado porque falta el archivo
+  default: defaultIcon,
 };
 
 const DietaryIcon = ({ diet }) => {

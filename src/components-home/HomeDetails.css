@@ -1,103 +1,214 @@
-/* HomeDetails.css */
-.recipe-detail {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
+/* ------------------------------ ESTRUCTURA PRINCIPAL ------------------------------ */
 .recipe-detail-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    gap: 30px; /* Espacio más grande entre los elementos */
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 1300px; /* Ampliar el tamaño máximo */
+    margin: 0 auto;
+    position: relative;
 }
 
+/* ------------------------------ ENCABEZADO DE LA RECETA ------------------------------ */
 .recipe-detail-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.recipe-detail-image {
-    width: 100%;
-    height: auto;
-    max-width: 600px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.recipe-detail h1 {
-    font-size: 28px;
-    margin: 15px 0;
-}
-
-.recipe-detail p {
-    font-size: 16px;
-    color: #555;
-}
-
-.recipe-description {
-    margin: 20px 0;
-    text-align: left;
-    width: 100%;
-}
-
-.recipe-actions {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+    align-items: flex-start;
+    gap: 30px; /* Espacio mayor entre la imagen y el texto */
 }
 
-.recipe-actions button {
-    padding: 10px 20px;
-    background-color: #ff5722;
-    color: white;
-    border: none;
-    border-radius: 5px;
+.recipe-detail-info h1 {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------ IMAGEN DE LA RECETA ------------------------------ */
+.recipe-detail-image {
+    width: 350px; /* Aumento del tamaño de la imagen */
+    height: 500px;
+    object-fit: cover;
+    border-radius: 5px; /* Bordes más suaves */
+}
+
+/* ------------------------------ INFORMACIÓN DE LA RECETA ------------------------------ */
+.recipe-detail-info {
+    flex: 1;
+    text-align: justify;
+}
+
+/* ------------------------------ DESCRIPCIÓN DE LA RECETA ------------------------------ */
+.recipe-description h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px; /* Aumento de tamaño en los encabezados */
+    font-weight: 600;
+    color: #000000; /* Color ligeramente más oscuro */
 }
 
-.recipe-actions button:hover {
-    background-color: #e64a19;
+.recipe-description p,
+.recipe-extra-info p,
+.ingredients-section ul,
+.nutritional-info ul {
+    text-align: justify;
+    font-size: 14px; /* Aumento de tamaño de fuente para mejor lectura */
+    color: #000000; /* Color de texto oscuro para mayor contraste */
+    line-height: 1.8; /* Espaciado más amplio para mejorar legibilidad */
 }
 
-.back-btn {
-    padding: 10px;
-    background-color: #f5c855;
-    color: white;
+/* ------------------------------ ACCIONES ABAJO DE LA RECETA ------------------------------ */
+.recipe-actions-below {
+    display: flex;
+    gap: 15px; /* Aumento del espacio entre botones */
+    margin-top: 30px;
+}
+
+.recipe-actions-below button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordes más redondeados */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px; /* Tamaño de texto ligeramente mayor para los botones */
+    padding: 10px 15px;
 }
 
-.back-btn:hover {
+.recipe-actions-below button i {
+    font-size: 20px; /* Aumento de tamaño de los íconos */
+}
+
+/* Botón de favoritos */
+.recipe-actions-below button:first-child {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #ccc; /* Color más suave para el icono de favoritos */
+}
+
+.recipe-actions-below button:first-child:hover {
+    background-color: #ccc; /* Fondo sutil en hover */
+    color: white; /* Cambiar color de texto en hover */
+    border: 2px solid #ccc;
+}
+
+/* Botón de acción principal */
+.recipe-actions-below button:last-child {
+    background-color: #FCCA36;
+    color: #ffffff;
+    width: 200px; /* Hacer el botón de carrito más ancho */
+}
+
+.recipe-actions-below button:last-child:hover {
     background-color: #e3b645;
 }
 
-
-/* HomeDetails.css */
-.dietary-restrictions,
-.nutritional-info {
-    margin-top: 20px;
+/* ------------------------------ BOTÓN DE REGRESO ------------------------------ */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px; /* Aumento de tamaño para el botón de regreso */
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
+.back-btn:hover {
+    color: #e3b645;
+}
+
+/* ------------------------------ SECCIONES DESPLEGABLES ------------------------------ */
+
+/* Estilo para las secciones desplegables (Ingredientes, Información Nutricional, etc.) */
+.ingredients-section h3,
+.nutritional-info h3,
+.recipe-extra-info h3,
 .dietary-restrictions h3,
-.nutritional-info h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
+.recipe-description h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    cursor: pointer;
+    border-bottom: 2px solid #ddd;
+    font-size: 14px; /* Aumento de tamaño en los encabezados */
+    font-weight: 600;
+    color: #000000; /* Color ligeramente más oscuro */
 }
 
-.dietary-restrictions ul,
-.nutritional-info ul {
-    list-style-type: disc;
-    padding-left: 20px;
+.ingredients-section h3 i,
+.nutritional-info h3 i,
+.recipe-extra-info h3 i,
+.dietary-restrictions h3 i,
+.recipe-description h3 i {
+    font-size: 18px;
+    color: #000000;
+    transition: transform 0.3s;
 }
 
-.dietary-restrictions li,
-.nutritional-info li {
-    font-size: 1rem;
+.ingredients-section h3:hover i,
+.nutritional-info h3:hover i,
+.recipe-extra-info h3:hover i,
+.dietary-restrictions h3:hover i,
+.recipe-description h3:hover i {
+    color: #e3b645; /* Cambio de color del icono al hacer hover */
+}
+
+/* Subtítulos dentro de las secciones desplegables */
+.ingredients-section h4,
+.nutritional-info h4,
+.recipe-extra-info h4,
+.dietary-restrictions h4 {
+    font-size: 16px; /* Aumento en tamaño de los subtítulos */
+    font-weight: 400;
+    color: #000000; /* Color más suave */
+}
+
+/* Listas dentro de las secciones desplegables */
+.ingredients-section ul,
+.nutritional-info ul,
+.recipe-extra-info div,
+.dietary-restrictions .dietary-icons {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px; /* Tamaño de fuente más grande */
+    color: #666; /* Color más oscuro para mejor contraste */
+}
+
+/* Estilo adicional para los íconos dentro de las listas */
+.ingredients-section ul li,
+.nutritional-info ul li,
+.recipe-extra-info div li {
+    margin-bottom: 8px; /* Espacio entre los ítems de la lista */
+}
+
+
+/* ------------------------------ BOTÓN DE REGRESO ------------------------------ */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px; /* Aumento de tamaño para el ícono */
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: #e3b645;
+}
+
+.back-btn p {
+    font-size: 12px; /* Tamaño de fuente más pequeño para el texto */
+    margin: 0; /* Eliminar márgenes predeterminados */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el ícono y el texto */
 }

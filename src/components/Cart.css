@@ -8,15 +8,18 @@
 }
 
 .cart-item {
+    display: flex; /* Usamos flexbox para organizar los elementos */
+    gap: 20px; /* Espacio entre imagen y contenido */
     margin-bottom: 20px;
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 8px;
+    background-color: #fff;
+    align-items: flex-start;
 }
 
 .recipe-header {
     display: flex;
-    align-items: center;
     gap: 15px;
 }
 
@@ -28,19 +31,21 @@
 }
 
 .recipe-details {
-    flex-grow: 1;
-}
-
-.action-buttons {
+    flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre cada sección (titulo, tiempo, etc.) */
 }
 
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
+.recipe-details h3 {
+    margin: 0;
     font-size: 18px;
+}
+
+.recipe-details h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
 }
 
 .servings-control {
@@ -50,17 +55,53 @@
     margin-top: 10px;
 }
 
+.collapsible-section {
+    margin-top: 15px;
+}
+
 .collapsible-section h4 {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 18px;
-    margin: 15px 0 5px;
+    font-size: 16px;
+    margin: 10px 0;
 }
 
 .ingredients-list,
 .steps-list {
     margin: 0;
     padding-left: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los botones */
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px; /* Separación entre contenido y botones */
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.icon-button:hover {
+    background-color: #f0f0f0;
+}
+
+.icon-button i {
+    font-size: 22px;
+}
+
+.collapsible-section ul {
+    list-style: none;
+    padding: 0;
 }

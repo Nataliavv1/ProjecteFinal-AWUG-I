@@ -11,7 +11,7 @@ const Cart = () => {
     const [purchasedIngredients, setPurchasedIngredients] = useState({});
     const [steps, setSteps] = useState({});
     const [expand, setExpand] = useState({});
-    const [readyTimes, setReadyTimes] = useState({}); // Nuevo estado para guardar tiempos de preparación
+    const [readyTimes, setReadyTimes] = useState({});
     const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
 
     const fetchIngredientsForServings = async (recipeId, numberOfServings) => {
@@ -100,7 +100,7 @@ const Cart = () => {
 
                 setReadyTimes((prev) => ({
                     ...prev,
-                    [recipeId]: data.readyInMinutes, // Guardar el tiempo de preparación
+                    [recipeId]: data.readyInMinutes,
                 }));
             } catch (error) {
                 console.error("Error fetching initial ingredients:", error);
@@ -126,78 +126,64 @@ const Cart = () => {
                             <div className="recipe-header">
                                 <img src={recipe.image} alt={recipe.title} className="recipe-image" />
                                 <div className="recipe-details">
-                                <h3>{recipe.title}</h3>
-                                <h4><i class='bx bx-time-five'></i>{recipe.readyInMinutes} minutes</h4>
-                                    <div className="action-buttons">
-                                        <button
-                                            onClick={() => removeFromCart(recipe.id)}
-                                            className="icon-button"
-                                            aria-label="Remove from cart"
-                                        >
-                                            <i className="bx bx-trash"></i>
-                                        </button>
-                                        <button
-                                            onClick={() => addFavorite(recipe)}
-                                            className="icon-button"
-                                            aria-label="Save to favorites"
-                                        >
-                                            <i className="bx bx-heart"></i>
-                                        </button>
+                                    <h3>{recipe.title}</h3>
+                                    <h4><i className='bx bx-time-five'></i>{recipe.readyInMinutes} minutes</h4>
+                                    <div className="servings-control">
+                                        <button onClick={() => handleServingsChange(recipe.id, -1)} disabled={servings[recipe.id] === 1}>-</button>
+                                        <span>Servings: {servings[recipe.id] || 1}</span>
+                                        <button onClick={() => handleServingsChange(recipe.id, 1)}>+</button>
+                                    </div>
+                                    <div className="collapsible-section">
+                                        <h4 onClick={() => toggleExpand(recipe.id, "ingredients")}>
+                                            Ingredients
+                                            <i className={`bx ${expand[recipe.id]?.ingredients ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+                                        </h4>
+                                        {expand[recipe.id]?.ingredients && (
+                                            <ul className="ingredients-list">
+                                                {ingredients[recipe.id]?.map((ingredient, index) => (
+                                                    <li key={index}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={purchasedIngredients[recipe.id]?.[index] || false}
+                                                            onChange={() => toggleIngredientPurchased(recipe.id, index)}
+                                                        />
+                                                        {ingredient.amount.toFixed(1)} {ingredient.unit} {ingredient.name}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                    <div className="collapsible-section">
+                                        <h4 onClick={() => toggleExpand(recipe.id, "steps")}>
+                                            Steps
+                                            <i className={`bx ${expand[recipe.id]?.steps ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+                                        </h4>
+                                        {expand[recipe.id]?.steps && (
+                                            <ol className="steps-list">
+                                                {steps[recipe.id]?.map((step, index) => (
+                                                    <li key={index}>{step.step}</li>
+                                                ))}
+                                            </ol>
+                                        )}
                                     </div>
                                 </div>
                             </div>
-                            <div className="servings-control">
+                            <div className="action-buttons">
                                 <button
-                                    onClick={() => handleServingsChange(recipe.id, -1)}
-                                    disabled={servings[recipe.id] === 1}
+                                    onClick={() => removeFromCart(recipe.id)}
+                                    className="icon-button"
+                                    aria-label="Remove from cart"
                                 >
-                                    -
+                                    <i className="bx bx-trash"></i>
                                 </button>
-                                <span>Servings: {servings[recipe.id] || 1}</span>
-                                <button onClick={() => handleServingsChange(recipe.id, 1)}>+</button>
+                                <button
+                                    onClick={() => addFavorite(recipe)}
+                                    className="icon-button"
+                                    aria-label="Save to favorites"
+                                >
+                                    <i className="bx bx-heart"></i>
+                                </button>
                             </div>
-                            <div className="collapsible-section">
-                                <h4 onClick={() => toggleExpand(recipe.id, "ingredients")}>
-                                    Ingredients
-                                    <i
-                                        className={`bx ${
-                                            expand[recipe.id]?.ingredients ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}
-                                    ></i>
-                                </h4>
-                                {expand[recipe.id]?.ingredients && (
-                                    <ul className="ingredients-list">
-                                        {ingredients[recipe.id]?.map((ingredient, index) => (
-                                            <li key={index}>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={purchasedIngredients[recipe.id]?.[index] || false}
-                                                    onChange={() => toggleIngredientPurchased(recipe.id, index)}
-                                                />
-                                                {ingredient.amount.toFixed(1)} {ingredient.unit} {ingredient.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                            <div className="collapsible-section">
-                                <h4 onClick={() => toggleExpand(recipe.id, "steps")}>
-                                    Steps
-                                    <i
-                                        className={`bx ${
-                                            expand[recipe.id]?.steps ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}
-                                    ></i>
-                                </h4>
-                                {expand[recipe.id]?.steps && (
-                                    <ol className="steps-list">
-                                        {steps[recipe.id]?.map((step, index) => (
-                                            <li key={index}>{step.step}</li>
-                                        ))}
-                                    </ol>
-                                )}
-                            </div>
-                            <hr />
                         </li>
                     ))}
                 </ul>
@@ -207,4 +193,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
