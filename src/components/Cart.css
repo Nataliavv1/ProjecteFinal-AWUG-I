@@ -1,5 +1,8 @@
 .cart-container {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .cart-list {
@@ -8,44 +11,59 @@
 }
 
 .cart-item {
-    display: flex; /* Usamos flexbox para organizar los elementos */
-    gap: 20px; /* Espacio entre imagen y contenido */
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    padding: 15px;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 10px;
     border-radius: 8px;
     background-color: #fff;
     align-items: flex-start;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-bottom: 2px solid #ddd;
 }
 
 .recipe-header {
     display: flex;
     gap: 15px;
+    width: 100%;
 }
 
 .recipe-image {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .recipe-details {
-    flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacio entre cada sección (titulo, tiempo, etc.) */
+    gap: 10px;
+}
+
+.recipe-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .recipe-details h3 {
     margin: 0;
     font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .recipe-details h4 {
     margin: 0;
     font-size: 14px;
-    color: #333;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 10px;
 }
 
 .servings-control {
@@ -55,8 +73,31 @@
     margin-top: 10px;
 }
 
+.servings-control span {
+    font-size: 14px; /* Título de servings más pequeño */
+    font-weight: 600;
+}
+
+.servings-control button {
+    font-size: 18px; /* Texto más pequeño en los botones */
+    padding: 5px 10px;
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.servings-control button:hover {
+    background-color: #c4c3c3;
+    border: 2px solid #c4c3c3;
+    color: white;
+}
+
 .collapsible-section {
     margin-top: 15px;
+    /* Eliminamos el borde en el contenedor */
 }
 
 .collapsible-section h4 {
@@ -64,8 +105,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
-    margin: 10px 0;
+    font-size: 14px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd; /* Borde más delgado debajo del título */
+}
+
+.collapsible-section h4 i {
+    font-size: 18px; /* Tamaño base del icono */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.collapsible-section h4 i:hover {
+    transform: scale(1.2); /* Icono más grande al hacer hover */
+    color: #e3b645; /* Color al hacer hover */
+}
+
+.collapsible-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.collapsible-section ul li {
+    font-size: 14px; /* Tamaño del texto dentro de los desplegables */
+    margin-bottom: 5px;
 }
 
 .ingredients-list,
@@ -74,34 +137,63 @@
     padding-left: 20px;
 }
 
+.steps-list {
+    font-size: 14px; /* Establecer el tamaño de texto a 12px */
+}
+
+.steps-list li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
 .action-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espacio entre los botones */
-    justify-content: center;
-    align-items: center;
-    margin-left: 15px; /* Separación entre contenido y botones */
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 .icon-button {
-    background: none;
-    border: none;
     cursor: pointer;
     font-size: 18px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s;
+    color: #fff;
+    border: 1px solid transparent;
 }
 
-.icon-button:hover {
-    background-color: #f0f0f0;
+.icon-button.delete {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #ccc;
+    font-size: 25px;
+}
+
+.icon-button.delete:hover {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    color: white;
+}
+
+.icon-button.favorite {
+    background-color: #fcca36;
+    color: white;
+    font-size: 25px;
+}
+
+.icon-button.favorite:hover {
+    background-color: #e3b645;
+}
+
+.icon-button.default {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+}
+
+.icon-button.default:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
 }
 
 .icon-button i {
     font-size: 22px;
-}
-
-.collapsible-section ul {
-    list-style: none;
-    padding: 0;
 }

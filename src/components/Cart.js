@@ -102,6 +102,15 @@ const Cart = () => {
                     ...prev,
                     [recipeId]: data.readyInMinutes,
                 }));
+
+                // Establecer las secciones como desplegadas al inicio
+                setExpand((prev) => ({
+                    ...prev,
+                    [recipeId]: {
+                        ingredients: true,
+                        steps: true,
+                    },
+                }));
             } catch (error) {
                 console.error("Error fetching initial ingredients:", error);
             }
@@ -126,8 +135,26 @@ const Cart = () => {
                             <div className="recipe-header">
                                 <img src={recipe.image} alt={recipe.title} className="recipe-image" />
                                 <div className="recipe-details">
-                                    <h3>{recipe.title}</h3>
-                                    <h4><i className='bx bx-time-five'></i>{recipe.readyInMinutes} minutes</h4>
+                                    <div className="recipe-title-container">
+                                        <h3>{recipe.title}</h3>
+                                        <div className="action-buttons">
+                                            <button
+                                                onClick={() => removeFromCart(recipe.id)}
+                                                className="icon-button delete" // Clases agregadas
+                                                aria-label="Remove from cart"
+                                            >
+                                                <i className="bx bx-trash"></i>
+                                            </button>
+                                            <button
+                                                onClick={() => addFavorite(recipe)}
+                                                className="icon-button favorite" // Clases agregadas
+                                                aria-label="Save to favorites"
+                                            >
+                                                <i className="bx bx-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <h4><i className="bx bx-time-five"></i>{recipe.readyInMinutes} minutes</h4>
                                     <div className="servings-control">
                                         <button onClick={() => handleServingsChange(recipe.id, -1)} disabled={servings[recipe.id] === 1}>-</button>
                                         <span>Servings: {servings[recipe.id] || 1}</span>
@@ -167,22 +194,6 @@ const Cart = () => {
                                         )}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="action-buttons">
-                                <button
-                                    onClick={() => removeFromCart(recipe.id)}
-                                    className="icon-button"
-                                    aria-label="Remove from cart"
-                                >
-                                    <i className="bx bx-trash"></i>
-                                </button>
-                                <button
-                                    onClick={() => addFavorite(recipe)}
-                                    className="icon-button"
-                                    aria-label="Save to favorites"
-                                >
-                                    <i className="bx bx-heart"></i>
-                                </button>
                             </div>
                         </li>
                     ))}
