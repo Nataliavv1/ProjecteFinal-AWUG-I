@@ -1,0 +1,374 @@
+/*---------------------------------src/components-recipe/TitleAndSubtitle.css---------------------------------------*/
+
+.title-container {
+    text-align: center; /* Centra el contenido horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.title-container h1 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #fcca36;
+    margin-bottom: 0; /* Elimina el espacio debajo del h1 */
+    margin-top: 50px;
+}
+
+.title-container h2 {
+    font-size: 45px;
+    font-weight: 800;
+    color: black;
+    margin-top: 5px; /* Elimina el espacio encima del h2 */
+    margin-bottom: 10px; /* Puedes ajustar este valor si prefieres más espacio debajo */
+}
+
+.title-container p {
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    margin: 10px 0;
+    margin-bottom: 50px;
+}
+
+/* Estilo para la palabra dentro del span */
+.title-container .highlighted-word {
+    color: #fcca36;
+    font-weight: 800;
+}
+
+/*-------------------------------src/components-recipe/Pagination.css-----------------------------------------------*/
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Centra la paginación horizontalmente */
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #ccc; /* Color de fondo gris */
+    color: white;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+  }
+  
+  .pagination button:hover {
+    background-color: #f0f0f0; /* Color al pasar el ratón */
+    color: #999;
+  }
+  
+  .pagination button.active {
+    background-color: #fcca36; /* Color de fondo cuando la página está activa */
+    border-color: #fcca36; /* Cambia el borde al mismo color */
+    color: white; /* Texto en blanco para la página activa */
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc; /* Color de fondo para el botón deshabilitado */
+    color: white; /* Color de texto para el botón deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor cuando el botón está deshabilitado */
+  }
+  
+/*---------------------------------------src/components-recipe/Filters.css------------------------------------------*/
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(252, 202, 54, 0.1);
+    border-radius: 5px;
+    justify-content: center; /* Centra todo el contenido horizontalmente */
+    align-items: center; /* Centra todo el contenido verticalmente */
+    text-align: center; /* Asegura que el texto esté centrado dentro del contenedor */
+    margin-bottom: 50px;
+  }
+  
+  .filters-container h3 {
+    width: 100%;
+    text-align: left; /* Alinea el título a la izquierda */
+    margin-bottom: 15px;
+    padding-left: 20px; /* Agrega un pequeño margen al inicio del título */
+  }
+  
+  label {
+    display: block;
+    width: 220px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left; /* Alinea el texto dentro del label */
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    appearance: none; /* Hace que el desplegable se vea más limpio */
+  }
+  
+  select:focus {
+    border-color: #fcca36;
+    outline: none;
+  }
+  
+  button.clear-all-button {
+    background-color: #fcca36;
+    color: black;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left; /* Alinea el texto del botón a la izquierda */
+  }
+  
+  button.clear-all-button:hover {
+    background-color: #e3b645;
+  }
+  
+  /* Asegura que los filtros se alineen bien en pantallas pequeñas y grandes */
+  @media screen and (min-width: 600px) {
+    .filters-container {
+      justify-content: center; /* Asegura que los filtros estén centrados en pantallas grandes */
+    }
+    .filters-container label {
+      width: 180px; /* Ajusta el tamaño de los filtros en pantallas grandes */
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .filters-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .filters-container label {
+      width: 100%;
+    }
+  }
+ 
+/*---------------------------------------------Estilo Cards---------------------------------------------------------*/
+/* Home Populars */
+.container-populars1 {
+    margin: 0 auto;
+    padding: 20px 80px;
+    overflow-x: hidden;
+}
+
+/* Línea superior */
+.container-populars1::before {
+    content: "";
+    display: block;
+    width: 1200px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 auto 20px;
+}
+
+/* Línea inferior */
+.container-populars1::after {
+    content: "";
+    display: block;
+    width: 1200px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px auto 0;
+}
+
+/* Títulos y subtítulos */
+.home-populars-texts1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    margin-bottom: 35px;
+}
+
+.home-populars-title1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 25px;
+}
+
+.home-populars-subtitle1 {
+    font-size: 18px;
+    color: black;
+    max-width: 700px;
+    font-weight: 300;
+}
+
+/* Listado de recetas */
+.recipe-list1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Tarjetas de receta */
+.recipe-card1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 228px;
+    height: 310px;
+    border-radius: 5px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 15px;
+}
+
+.recipe-image1 {
+    position: relative;
+    height: 185px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.recipe-image1 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Texto Receta */
+.recipe-info1 {
+    text-align: left;
+}
+
+
+.carousel-meta1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    color: #a8a8a8;
+}
+
+.carousel-meta1 span {
+    display: flex;
+    align-items: center;
+    color: #a8a8a8;
+}
+
+.carousel-meta1 i {
+    margin: 5px;
+    font-size: 18px;
+}
+
+/* Edición de los botones */
+.save-btn1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.save-btn1 i {
+    font-size: 20px;
+    color: #a8a8a8;
+}
+
+.save-btn1.saved1 i {
+    color: #ff5722;
+}
+
+.details-button1 {
+    background-color: #f5c855;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+}
+
+.details-button1:hover {
+    background-color: #e3b645;
+}
+
+/* Estilos para el mensaje de login */
+.login-message1 {
+    position: fixed;
+    bottom: -100px; /* Comienza fuera de la vista, en la parte inferior */
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho de la página */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 0; /* Eliminamos las esquinas redondeadas */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0; /* Inicialmente invisible */
+    animation: slideUp 0.5s ease-out forwards; /* Añadimos la animación */
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle más estilo */
+}
+
+/* Definir la animación */
+@keyframes slideUp {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+    }
+    100% {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+.button-container1 {
+    display: flex; /* Coloca los botones uno al lado del otro */
+    gap: 10px; /* Espaciado entre botones */
+    margin-top: 10px;
+}
+
+/* Botón de inicio de sesión */
+.login-message1 .login-button1 {
+    padding: 8px 35px;
+    background-color: #FCCA36;
+    color: black;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.login-message1 .login-button1:hover {
+    background-color: #e3b645;
+    font-weight: 500;
+}
+
+/* Botón de cerrar */
+.login-message1 .close-button1 {
+    padding: 8px 35px;
+    background-color: none;
+    border-color: #ccc;
+    color: black;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.login-message1 .close-button1:hover {
+    background-color: #ccc;
+}
+

@@ -102,7 +102,7 @@ function HomePopulars() {
       <div className="home-container-populars">
         <div className="home-populars-texts">
           <h1 className="home-populars-title">
-            Short on time but craving something delicious?
+          Discover some of our recipes
           </h1>
           <p className="home-populars-subtitle">
             Discover tasty recipes ready in minutes. Cook easy, fast, and full of flavor. Perfect for busy days or last-minute meals.

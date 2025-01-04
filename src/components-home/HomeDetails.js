@@ -98,13 +98,17 @@ function HomeDetails() {
 
     // Función para manejar el botón de "Back"
     const handleBackButtonClick = () => {
-        // Verificamos si estamos regresando desde la página de "Favorites" o "Cart"
-        if (location.state?.fromCart) {
-            navigate("/cart"); // Si venimos del carrito, redirigimos allí
-        } else if (location.state?.fromFavorites) {
-            navigate("/favorites"); // Si venimos de la página de Favorites, redirigimos allí
+        // Verificamos si estamos regresando desde una página específica
+        const fromPage = location.state?.fromPage; // Estado pasado al navegar
+
+        if (fromPage === "favorites") {
+            navigate("/favorites"); // Regresa a la página de favoritos
+        } else if (fromPage === "cart") {
+            navigate("/cart"); // Regresa al carrito
+        } else if (fromPage === "recipes") {
+            navigate("/recipes"); // Regresa a recetas
         } else {
-            navigate("/"); // Si no, redirigimos a la página de inicio
+            navigate("/"); // Página predeterminada (inicio)
         }
     };
 
@@ -259,4 +263,3 @@ function HomeDetails() {
 }
 
 export default HomeDetails;
-
