@@ -1,0 +1,33 @@
+.search-results-container {
+    padding: 20px;
+  }
+  
+  .search-results-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .recipe-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .recipe-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .recipe-image1 img {
+    width: 100%;
+    height: auto;
+  }
+  
+  

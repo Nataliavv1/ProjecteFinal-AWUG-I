@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import { Profile } from "./Profile";
-import { useCart } from "../components/CartContext"; // Importa el contexto del carrito
+import { useCart } from "../components/CartContext";
 import logo from "../img/icon.png";
 import "./Header.css";
 
@@ -12,10 +12,9 @@ function Header() {
   const { isAuthenticated } = useAuth0();
   const navigate = useNavigate();
   const location = useLocation();
-  const { cart } = useCart(); // Obtén los ítems del carrito
+  const { cart } = useCart();
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Manejar clic en favoritos
   const handleFavoriteClick = () => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -24,7 +23,6 @@ function Header() {
     }
   };
 
-  // Manejar clic en carrito
   const handleCartClick = () => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -33,15 +31,15 @@ function Header() {
     }
   };
 
-  // Manejar cambio en el dropdown
   const handleDropdownChange = (e) => {
     const value = e.target.value;
     if (value !== "all") {
       navigate(`/${value}`);
+    } else {
+      navigate("/");
     }
   };
 
-  // Manejar búsqueda
   const handleSearch = () => {
     if (searchTerm.trim() !== "") {
       navigate(`/search?query=${searchTerm}`);
@@ -59,7 +57,7 @@ function Header() {
           <select
             className="dropdown"
             onChange={handleDropdownChange}
-            value={location.pathname.replace("/", "") || "all"} // Sincronizar valor inicial
+            value={location.pathname.replace("/", "") || "all"}
           >
             <option value="all">All</option>
             <option value="recipes">Recipes</option>
@@ -97,14 +95,10 @@ function Header() {
         </div>
       </div>
 
-      {/* Navegación */}
       <nav className="navigation">
         <ul>
           <li>
-            <Link
-              to="/"
-              className={location.pathname === "/" ? "active" : ""}
-            >
+            <Link to="/" className={location.pathname === "/" ? "active" : ""}>
               Home
             </Link>
           </li>

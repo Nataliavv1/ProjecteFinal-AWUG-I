@@ -99,14 +99,19 @@ function HomeDetails() {
     // Función para manejar el botón de "Back"
     const handleBackButtonClick = () => {
         // Verificamos si estamos regresando desde una página específica
-        const fromPage = location.state?.fromPage; // Estado pasado al navegar
-
-        if (fromPage === "favorites") {
+        const fromPage = location.state?.fromFavorites; // Verificamos si vinimos de Favoritos
+        const fromCart = location.state?.fromCart; // Verificamos si vinimos del carrito
+        const fromRecipeList = location.state?.fromRecipeList; // Verificamos si vinimos de RecipeList
+        const fromSearchResults = location.state?.fromSearchResults; // Verificamos si vinimos de SearchResults
+    
+        if (fromPage) {
             navigate("/favorites"); // Regresa a la página de favoritos
-        } else if (fromPage === "cart") {
-            navigate("/cart"); // Regresa al carrito
-        } else if (fromPage === "recipes") {
-            navigate("/recipes"); // Regresa a recetas
+        } else if (fromCart) {
+            navigate("/cart"); // Regresa a la página del carrito
+        } else if (fromRecipeList) {
+            navigate("/recipes"); // Regresa a la página de recetas
+        } else if (fromSearchResults) {
+            navigate("/searchresults"); // Regresa a la página de búsqueda
         } else {
             navigate("/"); // Página predeterminada (inicio)
         }
@@ -131,9 +136,8 @@ function HomeDetails() {
                             <h3 onClick={() => toggleSection("description")}>
                                 Description{" "}
                                 <i
-                                    className={`bx ${
-                                        expandedSections.description ? "bx-chevron-up" : "bx-chevron-down"
-                                    }`}></i>
+                                    className={`bx ${expandedSections.description ? "bx-chevron-up" : "bx-chevron-down"
+                                        }`}></i>
                             </h3>
                             {expandedSections.description && (
                                 <p
@@ -148,11 +152,10 @@ function HomeDetails() {
                             <h3 onClick={() => toggleSection("dietaryRestrictions")}>
                                 Dietary Restrictions{" "}
                                 <i
-                                    className={`bx ${
-                                        expandedSections.dietaryRestrictions
+                                    className={`bx ${expandedSections.dietaryRestrictions
                                             ? "bx-chevron-up"
                                             : "bx-chevron-down"
-                                    }`}></i>
+                                        }`}></i>
                             </h3>
                             {expandedSections.dietaryRestrictions && (
                                 <div className="dietary-icons">
@@ -171,9 +174,8 @@ function HomeDetails() {
                             <h3 onClick={() => toggleSection("ingredients")}>
                                 Ingredients{" "}
                                 <i
-                                    className={`bx ${
-                                        expandedSections.ingredients ? "bx-chevron-up" : "bx-chevron-down"
-                                    }`}></i>
+                                    className={`bx ${expandedSections.ingredients ? "bx-chevron-up" : "bx-chevron-down"
+                                        }`}></i>
                             </h3>
                             {expandedSections.ingredients && (
                                 <ul>
@@ -194,9 +196,8 @@ function HomeDetails() {
                             <h3 onClick={() => toggleSection("nutritionalInfo")}>
                                 Nutritional Information{" "}
                                 <i
-                                    className={`bx ${
-                                        expandedSections.nutritionalInfo ? "bx-chevron-up" : "bx-chevron-down"
-                                    }`}></i>
+                                    className={`bx ${expandedSections.nutritionalInfo ? "bx-chevron-up" : "bx-chevron-down"
+                                        }`}></i>
                             </h3>
                             {expandedSections.nutritionalInfo && (
                                 <ul>
@@ -217,9 +218,8 @@ function HomeDetails() {
                             <h3 onClick={() => toggleSection("additionalInfo")}>
                                 Additional Information{" "}
                                 <i
-                                    className={`bx ${
-                                        expandedSections.additionalInfo ? "bx-chevron-up" : "bx-chevron-down"
-                                    }`}></i>
+                                    className={`bx ${expandedSections.additionalInfo ? "bx-chevron-up" : "bx-chevron-down"
+                                        }`}></i>
                             </h3>
                             {expandedSections.additionalInfo && (
                                 <div>
