@@ -111,7 +111,7 @@ function HomeDetails() {
         } else if (fromRecipeList) {
             navigate("/recipes"); // Regresa a la página de recetas
         } else if (fromSearchResults) {
-            navigate("/searchresults"); // Regresa a la página de búsqueda
+            navigate("/recipes"); // Regresa a la página de búsqueda
         } else {
             navigate("/"); // Página predeterminada (inicio)
         }

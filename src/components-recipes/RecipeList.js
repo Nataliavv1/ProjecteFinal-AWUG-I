@@ -16,14 +16,12 @@ function RecipeList() {
   const [visiblePages, setVisiblePages] = useState([1, 2, 3, 4, 5]);
   const [recipesPerPage, setRecipesPerPage] = useState(20); // Número de recetas por página
   const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para mostrar el mensaje de login
-  const [redirectToLogin, setRedirectToLogin] = useState(false); // Estado para controlar el redireccionamiento
 
   const { favorites, addFavorite, removeFavorite } = useFavorites(); // Usa el contexto de favoritos
   const { cart, addToCart, removeFromCart } = useCart(); // Usamos el hook de carrito
   const { isAuthenticated, loginWithRedirect } = useAuth0(); // Usamos isAuthenticated para saber si el usuario está logueado
-  //const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-  const API_KEY = '540464a4610b4e4c9488d105323ad0af'; // Usar esta cuando nos quedemos sin puntos en la otra
-  const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=4`; // Obtener 100 recetas
+  const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // API Key de Spoonacular
+  const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=25`; // Obtener 25 recetas
 
   const navigate = useNavigate();
 
@@ -52,10 +50,9 @@ function RecipeList() {
   const handleApplyFilters = (filters) => {
     let updatedRecipes = [...recipes];
 
-    // Comprobamos que el valor existe antes de aplicar el filtro
     if (filters.cuisine && filters.cuisine.length > 0) {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.cuisines && recipe.cuisines.some(cuisine => filters.cuisine.includes(cuisine))
+        recipe.cuisines && recipe.cuisines.some((cuisine) => filters.cuisine.includes(cuisine))
       );
     }
 
@@ -67,7 +64,7 @@ function RecipeList() {
 
     if (filters.dietary && filters.dietary.length > 0) {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.dietary && recipe.dietary.some(diet => filters.dietary.includes(diet))
+        recipe.dietary && recipe.dietary.some((diet) => filters.dietary.includes(diet))
       );
     }
 
@@ -88,7 +85,6 @@ function RecipeList() {
   };
 
   const handleClearFilters = () => {
-    // Reset the filters to default
     setFilteredRecipes(recipes);
     setCurrentPage(1); // Reset to first page
   };
@@ -96,21 +92,21 @@ function RecipeList() {
   const addToCartHandler = (recipe, e) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      setShowLoginMessage(true); // Mostrar el mensaje si no está logueado
-      return; // No redirigir hasta que el usuario haga clic en "Log In"
+      setShowLoginMessage(true);
+      return;
     }
 
     if (cart.some((item) => item.id === recipe.id)) {
-      removeFromCart(recipe.id); // Si ya está en el carrito, lo elimina
+      removeFromCart(recipe.id);
     } else {
-      addToCart(recipe); // Si no está, lo agrega al carrito
+      addToCart(recipe);
     }
   };
 
   const toggleSaveRecipe = (recipe) => {
     if (!isAuthenticated) {
-      setShowLoginMessage(true); // Mostrar el mensaje si no está logueado
-      return; // No redirigir hasta que el usuario haga clic en "Log In"
+      setShowLoginMessage(true);
+      return;
     }
 
     if (favorites.some((fav) => fav.id === recipe.id)) {
@@ -121,7 +117,13 @@ function RecipeList() {
   };
 
   const handleLoginRedirect = () => {
-    loginWithRedirect(); // Redirige a la página de login cuando el usuario hace clic
+    loginWithRedirect(); // Redirige a la página de login
+  };
+
+  const handleRecipeClick = (recipeId) => {
+    navigate(`/recipe/${recipeId}`, {
+      state: { fromRecipeList: true },
+    });
   };
 
   if (loading) {
@@ -145,17 +147,14 @@ function RecipeList() {
       <div className="home-container-populars1">
         <Filters
           onApplyFilters={handleApplyFilters}
-          onClearFilters={handleClearFilters} // Pasa la función para borrar los filtros
+          onClearFilters={handleClearFilters}
         />
-        
+
         {showLoginMessage && (
           <div className="login-message1">
             <p>You need to log in to save recipes or add them to your cart.</p>
             <div className="button-container1">
-              <button
-                className="login-button1"
-                onClick={handleLoginRedirect} // Solo redirige cuando el usuario hace clic en el botón
-              >
+              <button className="login-button1" onClick={handleLoginRedirect}>
                 Log In
               </button>
               <button
@@ -169,66 +168,77 @@ function RecipeList() {
         )}
 
         <div className="recipe-list1">
-          {filteredRecipes.slice((currentPage - 1) * recipesPerPage, currentPage * recipesPerPage).map((recipe) => (
-            <div
-              key={recipe.id}
-              className="recipe-card1"
-              onClick={() => navigate(`/recipe/${recipe.id}`, { state: { fromRecipes: true } })}
-            >
-              <div className="recipe-image1">
-                <img
-                  src={recipe.image}
-                  alt={recipe.title}
-                  className="recipe-image1"
-                />
-              </div>
-              <div className="recipe-info1">
-                <h3 className="carousel-title1">{recipe.title}</h3>
-                <div className="carousel-meta1">
-                  <span>
-                    <i className="bx bx-time-five"></i>{" "}
-                    {recipe.readyInMinutes} min
-                  </span>
-                  <button
-                    className={`save-btn1 ${favorites.some((fav) => fav.id === recipe.id) ? "saved1" : ""}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleSaveRecipe(recipe);
-                    }}
-                    aria-label={
-                      favorites.some((fav) => fav.id === recipe.id)
-                        ? "Remove from saved recipes"
-                        : "Save recipe"
-                    }
-                  >
-                    <i
-                      className={favorites.some((fav) => fav.id === recipe.id)
-                        ? "bx bxs-heart"
-                        : "bx bx-heart"
+          {filteredRecipes
+            .slice(
+              (currentPage - 1) * recipesPerPage,
+              currentPage * recipesPerPage
+            )
+            .map((recipe) => (
+              <div
+                key={recipe.id}
+                className="recipe-card1"
+                onClick={() => handleRecipeClick(recipe.id)}
+              >
+                <div className="recipe-image1">
+                  <img
+                    src={recipe.image}
+                    alt={recipe.title}
+                    className="recipe-image1"
+                  />
+                </div>
+                <div className="recipe-info1">
+                  <h3 className="carousel-title1">{recipe.title}</h3>
+                  <div className="carousel-meta1">
+                    <span>
+                      <i className="bx bx-time-five"></i>{" "}
+                      {recipe.readyInMinutes} min
+                    </span>
+                    <button
+                      className={`save-btn1 ${
+                        favorites.some((fav) => fav.id === recipe.id)
+                          ? "saved1"
+                          : ""
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSaveRecipe(recipe);
+                      }}
+                      aria-label={
+                        favorites.some((fav) => fav.id === recipe.id)
+                          ? "Remove from saved recipes"
+                          : "Save recipe"
                       }
-                    ></i>
-                  </button>
+                    >
+                      <i
+                        className={
+                          favorites.some((fav) => fav.id === recipe.id)
+                            ? "bx bxs-heart"
+                            : "bx bx-heart"
+                        }
+                      ></i>
+                    </button>
 
-                  <button
-                    className="details-button1"
-                    onClick={(e) => addToCartHandler(recipe, e)} // Llama a la función para agregar/eliminar del carrito
-                    aria-label={
-                      cart.some((item) => item.id === recipe.id)
-                        ? "Remove from cart"
-                        : "Add to cart"
-                    }
-                  >
-                    <i
-                      className={cart.some((item) => item.id === recipe.id)
-                        ? "bx bxs-plus"
-                        : "bx bx-plus"
+                    <button
+                      className="details-button1"
+                      onClick={(e) => addToCartHandler(recipe, e)}
+                      aria-label={
+                        cart.some((item) => item.id === recipe.id)
+                          ? "Remove from cart"
+                          : "Add to cart"
                       }
-                    ></i>
-                  </button>
+                    >
+                      <i
+                        className={
+                          cart.some((item) => item.id === recipe.id)
+                            ? "bx bxs-plus"
+                            : "bx bx-plus"
+                        }
+                      ></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         <Pagination

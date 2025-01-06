@@ -127,6 +127,7 @@ function Recipes() {
           favorites={favorites}
           cart={cart}
         />
+        
       </div>
 
       <FastRecipesColumn fastestRecipes={fastestRecipes} />

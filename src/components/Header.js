@@ -43,6 +43,7 @@ function Header() {
   const handleSearch = () => {
     if (searchTerm.trim() !== "") {
       navigate(`/search?query=${searchTerm}`);
+      setSearchTerm(""); // Limpiar el campo de búsqueda después de navegar
     }
   };
 
@@ -105,7 +106,7 @@ function Header() {
           <li>
             <Link
               to="/recipes"
-              className={location.pathname === "/recipes" ? "active" : ""}
+              className={location.pathname === "/recipes" ? "active" : "" }
             >
               Recipes
             </Link>
@@ -113,7 +114,7 @@ function Header() {
           <li>
             <Link
               to="/service"
-              className={location.pathname === "/service" ? "active" : ""}
+              className={location.pathname === "/service" ? "active" : "" }
             >
               Service
             </Link>
@@ -121,7 +122,7 @@ function Header() {
           <li>
             <Link
               to="/restaurants"
-              className={location.pathname === "/restaurants" ? "active" : ""}
+              className={location.pathname === "/restaurants" ? "active" : "" }
             >
               Restaurants
             </Link>
@@ -133,3 +134,4 @@ function Header() {
 }
 
 export default Header;
+

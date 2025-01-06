@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useFavorites } from "../components/FavoritesContext"; // Importar el contexto de favoritos
-import { useCart } from "../components/CartContext"; // Importar el hook del carrito
-import "../components-recipes/Recipes.css";
-import Footer from "../components/Footer";
+import { useFavorites } from "../components/FavoritesContext"; // Contexto de favoritos
+import { useCart } from "../components/CartContext"; // Hook del carrito
+import "../components/SearchResults.css";
 
 function SearchResults() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
-  const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para mostrar el mensaje de login
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
 
-  const { favorites, addFavorite, removeFavorite } = useFavorites(); // Usamos el contexto de favoritos
-  const { cart, addToCart, removeFromCart } = useCart(); // Usamos el hook de carrito
-  const { isAuthenticated, loginWithRedirect } = useAuth0(); // Usamos isAuthenticated para saber si el usuario está logueado
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { cart, addToCart, removeFromCart } = useCart();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,46 +21,58 @@ function SearchResults() {
   const query = queryParams.get("query") || "";
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      setSearchTerm(query); // Establecer el término de búsqueda
+    const previousSearchResults = location.state?.searchResults;
+    
+    if (previousSearchResults) {
+      // Si existen resultados anteriores en el estado de navegación, usarlos
+      setRecipes(previousSearchResults);
+      setLoading(false);
+    } else if (query) {
+      // Si hay un término de búsqueda en la URL, buscar recetas
+      fetchRecipes(query);
+    } else {
+      setLoading(false); // Si no hay término de búsqueda, no hacer nada más
+    }
+  }, [query, location.state]);
 
-      try {
-        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=540464a4610b4e4c9488d105323ad0af`);
-        const data = await response.json();
+  const fetchRecipes = async (searchQuery) => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&addRecipeInformation=true&apiKey=540464a4610b4e4c9488d105323ad0af`
+      );
+      const data = await response.json();
 
-        if (response.ok) {
-          setRecipes(data.results || []); // Asegúrate de que siempre sea un arreglo
-        } else {
-          throw new Error(data.message || "The recipes could not be loaded.");
-        }
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      if (response.ok) {
+        setRecipes(data.results || []);
+      } else {
+        throw new Error(data.message || "The recipes could not be loaded.");
       }
-    };
-
-    fetchRecipes();
-  }, [query]); // El término de búsqueda cambia si se actualiza el query
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addToCartHandler = (recipe, e) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      setShowLoginMessage(true); // Mostrar el mensaje si no está logueado
-      return; // No redirigir hasta que el usuario haga clic en "Log In"
+      setShowLoginMessage(true); // Mostrar mensaje de login si no está autenticado
+      return;
     }
 
     if (cart.some((item) => item.id === recipe.id)) {
-      removeFromCart(recipe.id); // Si ya está en el carrito, lo elimina
+      removeFromCart(recipe.id);
     } else {
-      addToCart(recipe); // Si no está, lo agrega al carrito
+      addToCart(recipe);
     }
   };
 
   const toggleSaveRecipe = (recipe) => {
     if (!isAuthenticated) {
-      setShowLoginMessage(true); // Mostrar el mensaje si no está logueado
-      return; // No redirigir hasta que el usuario haga clic en "Log In"
+      setShowLoginMessage(true); // Mostrar mensaje de login si no está autenticado
+      return;
     }
 
     if (favorites.some((fav) => fav.id === recipe.id)) {
@@ -73,22 +83,26 @@ function SearchResults() {
   };
 
   const handleLoginRedirect = () => {
-    loginWithRedirect(); // Redirige a la página de login cuando el usuario hace clic
+    loginWithRedirect();
   };
 
   const handleCloseLoginMessage = () => {
-    setShowLoginMessage(false); // Cierra el mensaje
+    setShowLoginMessage(false);
   };
 
   const handleRecipeClick = (recipe) => {
-    // Limpiar el campo de búsqueda cuando se hace clic en una receta
-    setSearchTerm(""); // Esto limpiará el campo de búsqueda
-    navigate(`/recipe/${recipe.id}`, { state: { fromSearchResults: true } });
+    navigate(`/recipe/${recipe.id}`, {
+      state: {
+        fromSearchResults: true,
+        searchQuery: query,
+        searchResults: recipes,
+      },
+    });
   };
 
   if (loading) {
     return (
-      <div className="loading-container1">
+      <div className="loading-container2">
         <p>Loading recipes...</p>
       </div>
     );
@@ -96,29 +110,29 @@ function SearchResults() {
 
   if (error) {
     return (
-      <div className="error-container1">
+      <div className="error-container2">
         <p>{`Error: ${error}`}</p>
       </div>
     );
   }
 
   return (
-    <section className="container-populars1">
-      <div className="home-container-populars1">
+    <section className="container-populars2">
+      <div className="home-container-populars2">
         {/* Mensaje de Login */}
         {showLoginMessage && (
-          <div className="login-message1">
+          <div className="login-message2">
             <p>You need to log in to save recipes or add them to your cart.</p>
-            <div className="button-container1">
+            <div className="button-container2">
               <button
-                className="login-button1"
-                onClick={handleLoginRedirect} // Solo redirige cuando el usuario hace clic
+                className="login-button2"
+                onClick={handleLoginRedirect}
               >
                 Log In
               </button>
               <button
-                className="close-button1"
-                onClick={handleCloseLoginMessage} // Cierra el mensaje
+                className="close-button2"
+                onClick={handleCloseLoginMessage}
               >
                 Close
               </button>
@@ -126,34 +140,38 @@ function SearchResults() {
           </div>
         )}
 
-        <div className="recipe-list1">
+        <div className="recipe-list2">
           {recipes.length > 0 ? (
             recipes.map((recipe) => (
               <div
                 key={recipe.id}
-                className="recipe-card1"
-                onClick={() => handleRecipeClick(recipe)} // Limpiar búsqueda al hacer clic
+                className="recipe-card2"
+                onClick={() => handleRecipeClick(recipe)}
               >
-                <div className="recipe-image1">
+                <div className="recipe-image2">
                   <img
                     src={recipe.image}
                     alt={recipe.title}
-                    className="recipe-image1"
+                    className="recipe-image2"
                   />
                 </div>
-                <div className="recipe-info1">
-                  <h3 className="carousel-title1">{recipe.title}</h3>
-                  <div className="carousel-meta1">
+                <div className="recipe-info2">
+                  <h3 className="carousel-title2">{recipe.title}</h3>
+                  <div className="carousel-meta2">
                     {recipe.readyInMinutes != null ? (
                       <span>
                         <i className="bx bx-time-five"></i>{" "}
                         {recipe.readyInMinutes} min
                       </span>
                     ) : (
-                      <span>Time not available</span> // Si no hay tiempo, mostramos un mensaje
+                      <span>Time not available</span>
                     )}
                     <button
-                      className={`save-btn1 ${favorites.some((fav) => fav.id === recipe.id) ? "saved1" : ""}`}
+                      className={`save-btn2 ${
+                        favorites.some((fav) => fav.id === recipe.id)
+                          ? "saved2"
+                          : ""
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleSaveRecipe(recipe);
@@ -165,16 +183,17 @@ function SearchResults() {
                       }
                     >
                       <i
-                        className={favorites.some((fav) => fav.id === recipe.id)
-                          ? "bx bxs-heart"
-                          : "bx bx-heart"
+                        className={
+                          favorites.some((fav) => fav.id === recipe.id)
+                            ? "bx bxs-heart"
+                            : "bx bx-heart"
                         }
                       ></i>
                     </button>
 
                     <button
-                      className="details-button1"
-                      onClick={(e) => addToCartHandler(recipe, e)} // Llama a la función para agregar/eliminar del carrito
+                      className="details-button2"
+                      onClick={(e) => addToCartHandler(recipe, e)}
                       aria-label={
                         cart.some((item) => item.id === recipe.id)
                           ? "Remove from cart"
@@ -182,9 +201,10 @@ function SearchResults() {
                       }
                     >
                       <i
-                        className={cart.some((item) => item.id === recipe.id)
-                          ? "bx bxs-plus"
-                          : "bx bx-plus"
+                        className={
+                          cart.some((item) => item.id === recipe.id)
+                            ? "bx bxs-plus"
+                            : "bx bx-plus"
                         }
                       ></i>
                     </button>
@@ -197,8 +217,6 @@ function SearchResults() {
           )}
         </div>
       </div>
-      {/* Añadimos el componente Footer */}
-      <Footer />
     </section>
   );
 }
