@@ -1,0 +1,47 @@
+
+/*search loader*/
+.loader {
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2.5px solid lightblue;
+    border-right-color: orange;
+    animation: l2 1s infinite linear;
+  }
+  @keyframes l2 {to{transform: rotate(1turn)}}
+
+  .restaurant-filters {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .special-features label{
+    display: block;
+    width: 220px;
+    margin-top: 5px;
+    padding-left: 15px;
+    text-indent: -15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+
+  }
+  .special-features label input {
+    margin: 2px 3px 3px 4px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  select {
+    width: 150px;
+    margin: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    background-color: white;
+    appearance: auto;
+}
