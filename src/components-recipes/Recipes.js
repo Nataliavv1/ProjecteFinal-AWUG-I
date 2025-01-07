@@ -24,8 +24,7 @@ function Recipes() {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
   const { cart, addToCart, removeFromCart } = useCart();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  //const API_KEY = 'd0fba68ef5204602ac929844f28b7d5f'; 
-  const API_KEY = '540464a4610b4e4c9488d105323ad0af'; // Usar esta cuando nos quedemos sin puntos en la otra
+  const API_KEY = '540464a4610b4e4c9488d105323ad0af'; // Cambia si es necesario
   const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100`;
   const navigate = useNavigate();
 
@@ -37,7 +36,7 @@ function Recipes() {
 
         if (response.ok) {
           setRecipes(data.results);
-          setFilteredRecipes(data.results); // Al inicio, no hay filtro, por lo que mostramos todas las recetas
+          setFilteredRecipes(data.results);
         } else {
           throw new Error(data.message || 'The recipes could not be loaded.');
         }
@@ -98,7 +97,6 @@ function Recipes() {
     setFilteredRecipes(filteredData);
   };
 
-  // Filtrar las recetas más rápidas
   const fastestRecipes = recipes
     .filter((recipe) => recipe.readyInMinutes !== undefined)
     .sort((a, b) => a.readyInMinutes - b.readyInMinutes)
@@ -120,18 +118,19 @@ function Recipes() {
     <section className="container-recipes">
       <div className="main-content">
         <TitleAndSubtitle />
-        <RecipeList
-          recipes={currentRecipes}
-          addToCartHandler={addToCartHandler}
-          toggleSaveRecipe={toggleSaveRecipe}
-          favorites={favorites}
-          cart={cart}
-        />
-        
-      </div>
 
-      <FastRecipesColumn fastestRecipes={fastestRecipes} />
-      {/* Añadimos el componente Footer */}
+        {/* Contenedor principal con filtros encima */}
+        <div className="recipes-layout">
+          <RecipeList
+            recipes={currentRecipes}
+            addToCartHandler={addToCartHandler}
+            toggleSaveRecipe={toggleSaveRecipe}
+            favorites={favorites}
+            cart={cart}
+          />
+        </div>
+      </div>
+      
       <Footer />
     </section>
   );

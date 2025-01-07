@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFavorites } from "../components/FavoritesContext"; // Importar el contexto
-import { useAuth0 } from "@auth0/auth0-react"; // Importar el hook useAuth0
-import { useCart } from "../components/CartContext"; // Importar el hook del carrito
-import Filters from "./Filters"; // Importamos el componente de filtros
-import Pagination from "./Pagination"; // Importamos el componente de paginación
+import { useFavorites } from "../components/FavoritesContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useCart } from "../components/CartContext";
+import Filters from "./Filters";
+import Pagination from "./Pagination";
 import "./Recipes.css";
+import FastRecipesColumn from "./FastRecipesColumn";
 
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
@@ -14,14 +15,14 @@ function RecipeList() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3, 4, 5]);
-  const [recipesPerPage, setRecipesPerPage] = useState(20); // Número de recetas por página
-  const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para mostrar el mensaje de login
+  const [recipesPerPage, setRecipesPerPage] = useState(20);
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
 
-  const { favorites, addFavorite, removeFavorite } = useFavorites(); // Usa el contexto de favoritos
-  const { cart, addToCart, removeFromCart } = useCart(); // Usamos el hook de carrito
-  const { isAuthenticated, loginWithRedirect } = useAuth0(); // Usamos isAuthenticated para saber si el usuario está logueado
-  const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // API Key de Spoonacular
-  const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=25`; // Obtener 25 recetas
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { cart, addToCart, removeFromCart } = useCart();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const API_KEY = "540464a4610b4e4c9488d105323ad0af";
+  const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=25`;
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ function RecipeList() {
 
         if (response.ok) {
           setRecipes(data.recipes);
-          setFilteredRecipes(data.recipes); // Inicializamos con todas las recetas
+          setFilteredRecipes(data.recipes);
         } else {
           throw new Error(data.message || "The recipes could not be loaded.");
         }
@@ -81,12 +82,12 @@ function RecipeList() {
     }
 
     setFilteredRecipes(updatedRecipes);
-    setCurrentPage(1); // Reset to first page when filters are applied
+    setCurrentPage(1);
   };
 
   const handleClearFilters = () => {
     setFilteredRecipes(recipes);
-    setCurrentPage(1); // Reset to first page
+    setCurrentPage(1);
   };
 
   const addToCartHandler = (recipe, e) => {
@@ -117,7 +118,7 @@ function RecipeList() {
   };
 
   const handleLoginRedirect = () => {
-    loginWithRedirect(); // Redirige a la página de login
+    loginWithRedirect();
   };
 
   const handleRecipeClick = (recipeId) => {
@@ -143,30 +144,29 @@ function RecipeList() {
   }
 
   return (
-    <section className="container-populars1">
-      <div className="home-container-populars1">
-        <Filters
-          onApplyFilters={handleApplyFilters}
-          onClearFilters={handleClearFilters}
-        />
+    <section className="container-recipes">
+      <div className="filters-container">
+        <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters} />
+      </div>
 
-        {showLoginMessage && (
-          <div className="login-message1">
-            <p>You need to log in to save recipes or add them to your cart.</p>
-            <div className="button-container1">
-              <button className="login-button1" onClick={handleLoginRedirect}>
-                Log In
-              </button>
-              <button
-                className="close-button1"
-                onClick={() => setShowLoginMessage(false)}
-              >
-                Close
-              </button>
-            </div>
+      {showLoginMessage && (
+        <div className="login-message1">
+          <p>You need to log in to save recipes or add them to your cart.</p>
+          <div className="button-container1">
+            <button className="login-button1" onClick={handleLoginRedirect}>
+              Log In
+            </button>
+            <button
+              className="close-button1"
+              onClick={() => setShowLoginMessage(false)}
+            >
+              Close
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
+      <div className="recipes-layout">
         <div className="recipe-list1">
           {filteredRecipes
             .slice(
@@ -241,15 +241,17 @@ function RecipeList() {
             ))}
         </div>
 
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          visiblePages={visiblePages}
-          setVisiblePages={setVisiblePages}
-          recipes={filteredRecipes}
-          recipesPerPage={recipesPerPage}
-        />
+        <FastRecipesColumn />
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        visiblePages={visiblePages}
+        setVisiblePages={setVisiblePages}
+        recipes={filteredRecipes}
+        recipesPerPage={recipesPerPage}
+      />
     </section>
   );
 }

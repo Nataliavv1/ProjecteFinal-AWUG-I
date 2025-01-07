@@ -1,3 +1,28 @@
+.container-recipes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters-container {
+  margin-bottom: 20px;
+}
+
+.recipes-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.recipe-list1 {
+  flex: 4; /* Ocupa más espacio */
+}
+
+.fast-recipes-column {
+  flex: 1; /* Ocupa menos espacio */
+}
+
+
 /*---------------------------------src/components-recipe/TitleAndSubtitle.css---------------------------------------*/
 
 .title-container {
@@ -78,18 +103,23 @@
   
 /*---------------------------------------src/components-recipe/Filters.css------------------------------------------*/
 
+/* Filtros */
 .filters-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    background-color: rgba(252, 202, 54, 0.1);
-    border-radius: 5px;
-    justify-content: center; /* Centra todo el contenido horizontalmente */
-    align-items: center; /* Centra todo el contenido verticalmente */
-    text-align: center; /* Asegura que el texto esté centrado dentro del contenedor */
-    margin-bottom: 50px;
-  }
+  background-color: rgba(252, 202, 54, 0.1); /* Fondo amarillo claro */
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Elimina cualquier borde adicional o sombra en el contenedor de filtros */
+.filters-container > * {
+  background: none !important; /* Asegúrate de que los elementos internos no tengan fondo */
+  border: none !important; /* Elimina bordes adicionales */
+}
   
   .filters-container h3 {
     width: 100%;
@@ -212,11 +242,25 @@
 }
 
 /* Listado de recetas */
+/* Contenedor general para las recetas */
 .recipe-list1 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
+  display: grid; /* Cambiar a grid */
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas uniformes */
+  gap: 20px; /* Espaciado entre tarjetas */
+  justify-items: center; /* Centrar las tarjetas */
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .recipe-list1 {
+      grid-template-columns: repeat(2, 1fr); /* Cambiar a dos columnas */
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-list1 {
+      grid-template-columns: 1fr; /* Una sola columna */
+  }
 }
 
 /* Tarjetas de receta */
