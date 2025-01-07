@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import DietaryIcon from "../components/DietaryIcon"; // Componente de íconos
 import "boxicons/css/boxicons.min.css"; // Asegúrate de importar Boxicons
 import "./HomeDetails.css";
+import SimilarRecipes from "../components-recipes/SimilarRecipes"; // Importar el componente SimilarRecipes
 
 function HomeDetails() {
     const { recipeId } = useParams();
@@ -257,6 +258,9 @@ function HomeDetails() {
                         </div>
                     </div>
                 </div>
+
+                {/* Agregar el componente SimilarRecipes debajo de toda la información */}
+                <SimilarRecipes ingredients={recipe.extendedIngredients} />
             </div>
         </section>
     );

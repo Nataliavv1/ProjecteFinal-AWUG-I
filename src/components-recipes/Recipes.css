@@ -8,6 +8,7 @@
   margin-bottom: 20px;
 }
 
+/* Estilo para layout de recetas */
 .recipes-layout {
   display: flex;
   justify-content: space-between;
@@ -15,11 +16,13 @@
 }
 
 .recipe-list1 {
-  flex: 4; /* Ocupa más espacio */
+  flex: 2; /* Proporción mayor para la lista de recetas */
+  margin-top: 135px; /* Ajustar según diseño */
 }
 
 .fast-recipes-column {
-  flex: 1; /* Ocupa menos espacio */
+  flex: 0.8; /* Hacer que la columna derecha ocupe menos espacio */
+  max-width: 280px; /* Opcional: ancho máximo */
 }
 
 
