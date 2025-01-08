@@ -5,7 +5,7 @@ import { useCart } from "../components/CartContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./SimilarRecipes.css";
 
-function SimilarRecipes({ ingredients }) {
+function SimilarRecipes({ ingredients, currentRecipeId }) {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,10 +14,11 @@ function SimilarRecipes({ ingredients }) {
   const { cart, addToCart, removeFromCart } = useCart();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-  
-  // Convertir la lista de ingredientes en un string para la búsqueda
-  const ingredientList = ingredients.map(ingredient => ingredient.name).join(",");
 
+  // Convertir la lista de ingredientes en un string para la búsqueda
+  const ingredientList = ingredients?.map((ingredient) => ingredient.name).join(",") || "";
+
+  // URL de la API de Spoonacular para buscar recetas basadas en los ingredientes
   const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&includeIngredients=${ingredientList}&number=10`;
 
   useEffect(() => {
@@ -30,7 +31,9 @@ function SimilarRecipes({ ingredients }) {
 
         if (response.ok) {
           if (data.results && data.results.length > 0) {
-            setRecipes(data.results); // Guardamos las recetas de la API
+            // Filtrar para asegurarse de que no se incluya la receta que se está visualizando
+            const filteredRecipes = data.results.filter(recipe => recipe.id !== currentRecipeId);
+            setRecipes(filteredRecipes); // Guardamos las recetas de la API
           } else {
             setError("No similar recipes found.");
           }
@@ -44,8 +47,13 @@ function SimilarRecipes({ ingredients }) {
       }
     };
 
-    fetchRecipes();
-  }, [ingredients]); // Dependencia de ingredientes para hacer una nueva llamada si cambian
+    if (ingredientList) {
+      fetchRecipes();
+    } else {
+      setLoading(false);
+      setError("No ingredients provided.");
+    }
+  }, [ingredientList, currentRecipeId]); // Dependencia de ingredientes
 
   const toggleSaveRecipe = (recipe) => {
     if (!isAuthenticated) {
@@ -90,7 +98,7 @@ function SimilarRecipes({ ingredients }) {
 
   return (
     <div className="similar-recipes-container">
-      <h2>Similar Recipes</h2>
+      <h2>Recipes Based on Your Ingredients</h2>
       <div className="similar-recipes-list">
         {recipes.map((recipe) => (
           <div
@@ -110,12 +118,20 @@ function SimilarRecipes({ ingredients }) {
                   toggleSaveRecipe(recipe);
                 }}
               >
-                <i className={`bx ${favorites.some((fav) => fav.id === recipe.id) ? "bxs-heart" : "bx-heart"}`}></i>
+                <i
+                  className={`bx ${
+                    favorites.some((fav) => fav.id === recipe.id) ? "bxs-heart" : "bx-heart"
+                  }`}
+                ></i>
               </button>
               <button
                 onClick={(e) => addToCartHandler(recipe, e)}
               >
-                <i className={`bx ${cart.some((item) => item.id === recipe.id) ? "bxs-plus" : "bx-plus"}`}></i>
+                <i
+                  className={`bx ${
+                    cart.some((item) => item.id === recipe.id) ? "bxs-plus" : "bx-plus"
+                  }`}
+                ></i>
               </button>
             </div>
           </div>
