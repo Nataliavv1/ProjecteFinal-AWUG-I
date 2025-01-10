@@ -115,144 +115,152 @@ function Restaurants() {
 
   return (
     <div>
-      <h1>Find the Best Restaurants</h1>
-      <form onSubmit={handleSearch}>
-        <div class="location-form">
-          <h2>First, let us know your location:</h2>
-          <input
-            type="text"
-            placeholder="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="State (e.g. CA, NY)"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            required
-          />
-          <button type="button" onClick={fetchCoordinates}>Get Location</button>
-          <p>Only US locations, please</p>
-        </div>
+      <div class="restaurants-page-title-div">
+        <p class="mini-title"> <span class="yellow-text">MAP</span> </p>
+        <h1 >Find <span class="yellow-text">Restaurants</span> near you</h1>
+        <p>Find the best restaurants near you. Discover flavors, check reviews, and choose the perfect spot for any occasion!</p>
+      </div>
+      <div class="restaurants-div">
+        <form onSubmit={handleSearch}>
+          <div class="location-form">
+            <h2>First, let us know your location:</h2>
+            <input
+              type="text"
+              placeholder="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="State (e.g. CA, NY)"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <button type="button" onClick={fetchCoordinates}>Get Location</button>
+            <p>Only US locations, please</p>
+          </div>
 
-        <div class="restaurant-form">
-        <h2>Now, what are you up for?</h2>
-          <input
-            type="text"
-            placeholder="Cuisine Type"
-            value={cuisine}
-            onChange={(e) => setCuisine(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Distance (miles)"
-            value={distance}
-            onChange={(e) => setDistance(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Budget ($)"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-          />
-          <input
-            type="number"
-            step="0.1"
-            placeholder="Min Rating (0-5)"
-            value={minRating}
-            onChange={(e) => setMinRating(e.target.value)}
-          />
-          <button type="submit" class="search-button" disabled={loading}>{loading ? <div className="loader"></div> : "Search"}</button>
-        </div>        
-      </form>
+          <div class="restaurant-form">
+          <h2>Now, what are you up for?</h2>
+            <input
+              type="text"
+              placeholder="Cuisine Type"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Distance (miles)"
+              value={distance}
+              onChange={(e) => setDistance(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Budget ($)"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+            />
+            <input
+              type="number"
+              step="0.1"
+              placeholder="Min Rating (0-5)"
+              value={minRating}
+              onChange={(e) => setMinRating(e.target.value)}
+            />
+            <button type="submit" class="search-button" disabled={loading}>{loading ? <div className="loader"></div> : "Search"}</button>
+          </div>        
+        </form>
 
-       {/* Filter Section */}
-       
-        <h2>Here are some options to refine your search:</h2>
-        <div className="restaurant-filters">
-        <div>
-        <span class="filter-options">Restaurant Type</span>
-        <select value={restaurantType} onChange={(e) => setRestaurantType(e.target.value)}>
-          <option value="All">All Types</option>
-          <option value="Fast Food">Fast Food</option>
-          <option value="Casual Dining">Casual Dining</option>
-          <option value="Fine Dining">Fine Dining</option>
-        </select>
-        </div>
+        {/* Filter Section */}
+        
+          <h2>Here are some options to refine your search:</h2>
+          <div className="restaurant-filters">
+          <div>
+          <span class="filter-options">Restaurant Type</span>
+          <select value={restaurantType} onChange={(e) => setRestaurantType(e.target.value)}>
+            <option value="All">All Types</option>
+            <option value="Fast Food">Fast Food</option>
+            <option value="Casual Dining">Casual Dining</option>
+            <option value="Fine Dining">Fine Dining</option>
+          </select>
+          </div>
 
-        <div>
-        <span class="filter-options">Ratings</span>
-        <select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
-          <option value="0">Any Rating</option>
-          <option value="4">4+ Stars</option>
-          <option value="5">5 Stars</option>
-        </select>
-        </div>
+          <div>
+          <span class="filter-options">Ratings</span>
+          <select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
+            <option value="0">Any Rating</option>
+            <option value="4">4+ Stars</option>
+            <option value="5">5 Stars</option>
+          </select>
+          </div>
 
-        <div>
-        <span class="filter-options">Price Range</span>
-        <select value={budget} onChange={(e) => setBudget(e.target.value)}>
-          <option value="">Any Price</option>
-          <option value="1">$</option>
-          <option value="2">$$</option>
-          <option value="3">$$$</option>
-          <option value="4">$$$$</option>
-        </select>
+          <div>
+          <span class="filter-options">Price Range</span>
+          <select value={budget} onChange={(e) => setBudget(e.target.value)}>
+            <option value="">Any Price</option>
+            <option value="1">$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4">$$$$</option>
+          </select>
+          </div>
+          
+          <div>
+          <span class="filter-options">Opening Hours</span>
+          <select value={openingHours} onChange={(e) => setOpeningHours(e.target.value)}>
+            <option value="Anytime">Anytime</option>
+            <option value="Open Now">Open Now</option>
+          </select>
+          </div>
+
+          <div class="special-features">
+            <span>Special Features</span>
+            <div class="filter-options">
+              <label>
+                <input type="checkbox" checked={specialFeatures.delivery} onChange={() => handleFeatureChange("delivery")} />
+                Delivery
+              </label>
+              <label>
+                <input type="checkbox" checked={specialFeatures.outdoorSeating} onChange={() => handleFeatureChange("outdoorSeating")} />
+                Outdoor Seating
+              </label>
+            </div>
+          </div>
         </div>
         
+
+        <div id="map" style={{ height: "300px", width: "80%", marginTop: "20px" }}></div>
+
         <div>
-        <span class="filter-options">Opening Hours</span>
-        <select value={openingHours} onChange={(e) => setOpeningHours(e.target.value)}>
-          <option value="Anytime">Anytime</option>
-          <option value="Open Now">Open Now</option>
-        </select>
+          <h2>Here you have our recommendations:</h2>
+          {displayedRestaurants.length > 0 ? (
+            displayedRestaurants.map((restaurant, index) => (
+              <div key={index}>
+                <h3>{restaurant.name}</h3>
+                <p>📍 {restaurant.address.street_addr}, {restaurant.address.city}</p>
+                <p>⭐ {restaurant.weighted_rating_value.toFixed(1)} ({restaurant.aggregated_rating_count} reviews)</p>
+                <p>💰 Price Level: {"$".repeat(restaurant.dollar_signs)}</p>
+                <p>🕒 Open Now: {restaurant.is_open ? "Yes" : "No"}</p>
+                <img src={restaurant.food_photos?.[0] || restaurant.logo_photos?.[0]} alt={restaurant.name} width="100" />
+              </div>
+            ))
+          ) : (
+            <p>No results found.</p>
+          )}
         </div>
 
-        <div class="special-features">
-          <span class="filter-options">Special Features</span>
-          <label>
-            <input type="checkbox" checked={specialFeatures.delivery} onChange={() => handleFeatureChange("delivery")} />
-            Delivery
-          </label>
-          <label>
-            <input type="checkbox" checked={specialFeatures.outdoorSeating} onChange={() => handleFeatureChange("outdoorSeating")} />
-            Outdoor Seating
-          </label>
-        </div>
-      </div>
-
-
-      <div id="map" style={{ height: "300px", width: "80%", marginTop: "20px" }}></div>
-
-      <div>
-        <h2>Here you have our recommendations:</h2>
-        {displayedRestaurants.length > 0 ? (
-          displayedRestaurants.map((restaurant, index) => (
-            <div key={index}>
-              <h3>{restaurant.name}</h3>
-              <p>📍 {restaurant.address.street_addr}, {restaurant.address.city}</p>
-              <p>⭐ {restaurant.weighted_rating_value.toFixed(1)} ({restaurant.aggregated_rating_count} reviews)</p>
-              <p>💰 Price Level: {"$".repeat(restaurant.dollar_signs)}</p>
-              <p>🕒 Open Now: {restaurant.is_open ? "Yes" : "No"}</p>
-              <img src={restaurant.food_photos?.[0] || restaurant.logo_photos?.[0]} alt={restaurant.name} width="100" />
-            </div>
-          ))
-        ) : (
-          <p>No results found.</p>
+        {restaurants.length > 4 && (
+          <div>
+            <button disabled={page === 0} onClick={() => setPage(page - 1)}>
+              Previous
+            </button>
+            <span> Page {page + 1} </span>
+            <button onClick={() => setPage(page + 1)}>Next</button>
+          </div>
         )}
       </div>
-
-      {restaurants.length > 4 && (
-        <div>
-          <button disabled={page === 0} onClick={() => setPage(page - 1)}>
-            Previous
-          </button>
-          <span> Page {page + 1} </span>
-          <button onClick={() => setPage(page + 1)}>Next</button>
-        </div>
-      )}
     </div>
   ) 
 }

@@ -1,7 +1,7 @@
 
 /*search loader*/
 .loader {
-    width: 15px;
+    width: 14px;
     aspect-ratio: 1;
     border-radius: 50%;
     border: 2.5px solid lightblue;
@@ -10,6 +10,50 @@
   }
   @keyframes l2 {to{transform: rotate(1turn)}}
 
+  .restaurants-page-title-div {
+    text-align: center;
+    width:90%;
+  }
+
+  .restaurants-page-title-div p{
+    font-size: 12px;
+  }
+
+  .yellow-text {
+    color: #FCDA73;
+  }
+
+  .restaurants-div {
+    background-color: rgba(252, 202, 54, 0.10);
+    width: 90%;
+  }
+
+  .location-form {
+    background-color: rgb(255, 255, 255);
+  }
+
+  input{
+    width: 150px;
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    background-color: white;
+    appearance: auto;
+  }
+
+  button {
+    width: 150px;
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #FCDA73;
+    border-radius: 0px;
+    background-color: #FCDA73;
+    appearance: auto;
+  }
+
   .restaurant-filters {
     width: 90%;
     display: flex;
@@ -17,19 +61,31 @@
     flex-wrap: wrap;
   }
 
+  .special-features {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-options{
+    margin-top: 15px;
+  }
+
   .special-features label{
-    display: block;
-    width: 220px;
-    margin-top: 5px;
+    width: 250px;
+    display: flex;
+    width: 22px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     padding-left: 15px;
-    text-indent: -15px;
     font-size: 14px;
     font-weight: bold;
     text-align: left;
 
   }
   .special-features label input {
-    margin: 2px 3px 3px 4px;
+    margin: 3px;
     vertical-align: middle;
     position: relative;
     top: -1px;
