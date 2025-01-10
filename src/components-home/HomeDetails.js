@@ -7,22 +7,24 @@ import DietaryIcon from "../components/DietaryIcon"; // Componente de íconos
 import "boxicons/css/boxicons.min.css"; // Asegúrate de importar Boxicons
 import "./HomeDetails.css";
 import SimilarRecipes from "../components-recipes/SimilarRecipes"; // Importar el componente SimilarRecipes
+import Footer from "../components/Footer";
 
 function HomeDetails() {
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para mensaje de login
 
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const { cart, addToCart, removeFromCart } = useCart();
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     const navigate = useNavigate();
-    const location = useLocation();  // Hook para obtener la ubicación actual
+    const location = useLocation(); // Hook para obtener la ubicación actual
 
     const [expandedSections, setExpandedSections] = useState({
-        description: true, // Esta sección está abierta por defecto
+        description: true,
         ingredients: false,
         nutritionalInfo: false,
         additionalInfo: false,
@@ -37,6 +39,9 @@ function HomeDetails() {
     };
 
     useEffect(() => {
+        // Desplazarse al principio de la página cuando se carga HomeDetails.js
+        window.scrollTo(0, 0); // Esto mueve la página al principio
+
         const fetchRecipe = async () => {
             try {
                 const response = await fetch(
@@ -61,7 +66,7 @@ function HomeDetails() {
 
     const toggleSaveRecipe = () => {
         if (!isAuthenticated) {
-            loginWithRedirect();
+            setShowLoginMessage(true); // Mostrar mensaje si no está autenticado
             return;
         }
 
@@ -75,7 +80,7 @@ function HomeDetails() {
     const addToCartHandler = (e) => {
         e.stopPropagation();
         if (!isAuthenticated) {
-            loginWithRedirect();
+            setShowLoginMessage(true); // Mostrar mensaje si no está autenticado
             return;
         }
 
@@ -97,34 +102,53 @@ function HomeDetails() {
     const nutritionalInfo =
         recipe.nutrition && recipe.nutrition.nutrients ? recipe.nutrition.nutrients : [];
 
-    // Función para manejar el botón de "Back"
     const handleBackButtonClick = () => {
-        // Verificamos si estamos regresando desde una página específica
-        const fromPage = location.state?.fromFavorites; // Verificamos si vinimos de Favoritos
-        const fromCart = location.state?.fromCart; // Verificamos si vinimos del carrito
-        const fromRecipeList = location.state?.fromRecipeList; // Verificamos si vinimos de RecipeList
-        const fromSearchResults = location.state?.fromSearchResults; // Verificamos si vinimos de SearchResults
-    
+        const fromPage = location.state?.fromFavorites;
+        const fromCart = location.state?.fromCart;
+        const fromRecipeList = location.state?.fromRecipeList;
+        const fromSearchResults = location.state?.fromSearchResults;
+
         if (fromPage) {
-            navigate("/favorites"); // Regresa a la página de favoritos
+            navigate("/favorites");
         } else if (fromCart) {
-            navigate("/cart"); // Regresa a la página del carrito
+            navigate("/cart");
         } else if (fromRecipeList) {
-            navigate("/recipes"); // Regresa a la página de recetas
+            navigate("/recipes");
         } else if (fromSearchResults) {
-            navigate("/recipes"); // Regresa a la página de búsqueda
+            navigate("/recipes");
         } else {
-            navigate("/"); // Página predeterminada (inicio)
+            navigate("/");
         }
     };
 
     return (
         <section className="recipe-detail">
             <div className="recipe-detail-container">
-                {/* Botón de volver con ícono */}
+                {/* Botón de volver */}
                 <button className="back-btn" onClick={handleBackButtonClick}>
-                    <p><i className="bx bx-arrow-back"></i> BACK</p>
+                    <p>
+                        <i className="bx bx-arrow-back"></i> BACK
+                    </p>
                 </button>
+
+                {/* Mensaje emergente de login */}
+                {showLoginMessage && (
+                    <div className="login-message">
+                        <p>You need to log in to save recipes or add them to your cart.</p>
+                        <div className="button-container">
+                            <button className="login-button" onClick={loginWithRedirect}>
+                                Log In
+                            </button>
+                            <button
+                                className="close-button"
+                                onClick={() => setShowLoginMessage(false)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="recipe-detail-header">
                     <img src={recipe.image} alt={recipe.title} className="recipe-detail-image" />
                     <div className="recipe-detail-info">
@@ -132,13 +156,12 @@ function HomeDetails() {
                         <p>
                             <i className="bx bx-time-five"></i> {recipe.readyInMinutes} minutes
                         </p>
-                        {/* Sección de Descripción */}
                         <div className="recipe-description">
                             <h3 onClick={() => toggleSection("description")}>
                                 Description{" "}
                                 <i
-                                    className={`bx ${expandedSections.description ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}></i>
+                                    className={`bx ${expandedSections.description ? "bx-chevron-up" : "bx-chevron-down"}`}
+                                ></i>
                             </h3>
                             {expandedSections.description && (
                                 <p
@@ -148,15 +171,13 @@ function HomeDetails() {
                                 />
                             )}
                         </div>
-                        {/* Sección de Dietary Restrictions */}
                         <div className="dietary-restrictions">
                             <h3 onClick={() => toggleSection("dietaryRestrictions")}>
                                 Dietary Restrictions{" "}
                                 <i
-                                    className={`bx ${expandedSections.dietaryRestrictions
-                                            ? "bx-chevron-up"
-                                            : "bx-chevron-down"
-                                        }`}></i>
+                                    className={`bx ${
+                                        expandedSections.dietaryRestrictions ? "bx-chevron-up" : "bx-chevron-down"
+                                    }`}></i>
                             </h3>
                             {expandedSections.dietaryRestrictions && (
                                 <div className="dietary-icons">
@@ -170,13 +191,12 @@ function HomeDetails() {
                                 </div>
                             )}
                         </div>
-                        {/* Sección de Ingredientes */}
                         <div className="ingredients-section">
                             <h3 onClick={() => toggleSection("ingredients")}>
                                 Ingredients{" "}
                                 <i
-                                    className={`bx ${expandedSections.ingredients ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}></i>
+                                    className={`bx ${expandedSections.ingredients ? "bx-chevron-up" : "bx-chevron-down"}`}
+                                ></i>
                             </h3>
                             {expandedSections.ingredients && (
                                 <ul>
@@ -192,13 +212,13 @@ function HomeDetails() {
                                 </ul>
                             )}
                         </div>
-                        {/* Información Nutricional */}
                         <div className="nutritional-info">
                             <h3 onClick={() => toggleSection("nutritionalInfo")}>
                                 Nutritional Information{" "}
                                 <i
-                                    className={`bx ${expandedSections.nutritionalInfo ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}></i>
+                                    className={`bx ${
+                                        expandedSections.nutritionalInfo ? "bx-chevron-up" : "bx-chevron-down"
+                                    }`}></i>
                             </h3>
                             {expandedSections.nutritionalInfo && (
                                 <ul>
@@ -214,13 +234,13 @@ function HomeDetails() {
                                 </ul>
                             )}
                         </div>
-                        {/* Información Adicional */}
                         <div className="recipe-extra-info">
                             <h3 onClick={() => toggleSection("additionalInfo")}>
                                 Additional Information{" "}
                                 <i
-                                    className={`bx ${expandedSections.additionalInfo ? "bx-chevron-up" : "bx-chevron-down"
-                                        }`}></i>
+                                    className={`bx ${
+                                        expandedSections.additionalInfo ? "bx-chevron-up" : "bx-chevron-down"
+                                    }`}></i>
                             </h3>
                             {expandedSections.additionalInfo && (
                                 <div>
@@ -237,31 +257,32 @@ function HomeDetails() {
                                 </div>
                             )}
                         </div>
-                        {/* Botones */}
                         <div className="recipe-actions-below">
                             <button onClick={toggleSaveRecipe}>
                                 <i
-                                    className={favorites.some((fav) => fav.id === recipe.id)
-                                        ? "bx bxs-heart"
-                                        : "bx bx-heart"
+                                    className={
+                                        favorites.some((fav) => fav.id === recipe.id)
+                                            ? "bx bxs-heart"
+                                            : "bx bx-heart"
                                     }
                                 ></i>{" "}
                             </button>
                             <button onClick={addToCartHandler}>
                                 <i
-                                    className={cart.some((item) => item.id === recipe.id)
-                                        ? "bx bxs-plus"
-                                        : "bx bx-plus"
+                                    className={
+                                        cart.some((item) => item.id === recipe.id)
+                                            ? "bx bxs-plus"
+                                            : "bx bx-plus"
                                     }
                                 ></i>{" "}
                             </button>
                         </div>
                     </div>
                 </div>
-
-                {/* Agregar el componente SimilarRecipes debajo de toda la información */}
                 <SimilarRecipes ingredients={recipe.extendedIngredients} />
             </div>
+            {/* Añadimos el componente Footer */}
+            <Footer />
         </section>
     );
 }
