@@ -4,8 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import "./Restaurants.css";
 import markerIconImage from '../img/marker_map_icon.png';
 
-const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-//const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
+//const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
+const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
 
 function Restaurants() {
   const [city, setCity] = useState("");

@@ -21,8 +21,8 @@ function RecipeList() {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
   const { cart, addToCart, removeFromCart } = useCart();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-  //const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
+  //const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
+  const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
   const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=25`;
 
   const navigate = useNavigate();
