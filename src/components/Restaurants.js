@@ -36,6 +36,7 @@ function Restaurants() {
       if (data.length > 0) {
         setLat(parseFloat(data[0].lat));
         setLng(parseFloat(data[0].lon));
+        alert("Location found, please continue filling the form.");
       } else {
         alert("Location not found. Try a different city/state.");
       }
@@ -143,36 +144,47 @@ function Restaurants() {
           </div>
 
           <div class="restaurant-form">
-          <h2>Now, what are you up for?</h2>
-            <label>Cuisine type</label>
-            <input
-              type="text"
-              placeholder="Cuisine Type"
-              value={cuisine}
-              onChange={(e) => setCuisine(e.target.value)}
-            />
-            <label>Distance</label>
-            <input
-              type="number"
-              placeholder="Enter radious in miles"
-              value={distance}
-              onChange={(e) => setDistance(e.target.value)}
-            />
-            <label>Budget</label>
-            <input
-              type="number"
-              placeholder="Enter "
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-            />
-            <input
-              type="number"
-              step="0.1"
-              placeholder="Min Rating (0-5)"
-              value={minRating}
-              onChange={(e) => setMinRating(e.target.value)}
-            />
-            <button type="submit" class="search-button" disabled={loading}>{loading ? <div className="loader"></div> : "Search"}</button>
+          <h2>Now, what are your preferences?</h2>
+            <div class="restaurant-form-input"> 
+              <div class="restaurant-form-input-options">
+                <label>Cuisine</label>
+                <input
+                  type="text"
+                  placeholder="Italian, Mexican, etc."
+                  value={cuisine}
+                  onChange={(e) => setCuisine(e.target.value)}
+                />
+              </div>
+              <div class="restaurant-form-input-options">
+              <label>Distance</label>
+                <input
+                  type="number"
+                  placeholder="Enter radious in miles"
+                  value={distance}
+                  onChange={(e) => setDistance(e.target.value)}
+                />
+              </div>
+              <div class="restaurant-form-input-options">
+              <label>Budget</label>
+                <input
+                  type="number"
+                  placeholder="Enter "
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                />
+              </div>
+              <div class="restaurant-form-input-options">
+                <label>Rating</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  placeholder="Min Rating (0-5)"
+                  value={minRating}
+                  onChange={(e) => setMinRating(e.target.value)}
+                />
+              </div>
+              <button type="submit" class="search-button" disabled={loading}>{loading ? <div className="loader"></div> : "Search"}</button>
+            </div>
           </div>        
         </form>
 
@@ -181,41 +193,41 @@ function Restaurants() {
           <h2>Here are some options to refine your search:</h2>
           <div className="restaurant-filters">
             <div>
-            <span class="filter-options">Restaurant Type</span>
-            <select value={restaurantType} onChange={(e) => setRestaurantType(e.target.value)}>
-              <option value="All">All Types</option>
-              <option value="Fast Food">Fast Food</option>
-              <option value="Casual Dining">Casual Dining</option>
-              <option value="Fine Dining">Fine Dining</option>
-            </select>
+              <span class="filter-options">Restaurant Type</span>
+              <select value={restaurantType} onChange={(e) => setRestaurantType(e.target.value)}>
+                <option value="All">All Types</option>
+                <option value="Fast Food">Fast Food</option>
+                <option value="Casual Dining">Casual Dining</option>
+                <option value="Fine Dining">Fine Dining</option>
+              </select>
             </div>
 
             <div>
-            <span class="filter-options">Ratings</span>
-            <select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
-              <option value="0">Any Rating</option>
-              <option value="4">4+ Stars</option>
-              <option value="5">5 Stars</option>
-            </select>
+              <span class="filter-options">Ratings</span>
+              <select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
+                <option value="0">Any Rating</option>
+                <option value="4">4+ Stars</option>
+                <option value="5">5 Stars</option>
+              </select>
             </div>
 
             <div>
-            <span class="filter-options">Price Range</span>
-            <select value={budget} onChange={(e) => setBudget(e.target.value)}>
-              <option value="">Any Price</option>
-              <option value="1">$</option>
-              <option value="2">$$</option>
-              <option value="3">$$$</option>
-              <option value="4">$$$$</option>
-            </select>
+              <span class="filter-options">Price Range</span>
+              <select value={budget} onChange={(e) => setBudget(e.target.value)}>
+                <option value="">Any Price</option>
+                <option value="1">$</option>
+                <option value="2">$$</option>
+                <option value="3">$$$</option>
+                <option value="4">$$$$</option>
+              </select>
             </div>
             
             <div>
-            <span class="filter-options">Opening Hours</span>
-            <select value={openingHours} onChange={(e) => setOpeningHours(e.target.value)}>
-              <option value="Anytime">Anytime</option>
-              <option value="Open Now">Open Now</option>
-            </select>
+              <span class="filter-options">Opening Hours</span>
+              <select value={openingHours} onChange={(e) => setOpeningHours(e.target.value)}>
+                <option value="Anytime">Anytime</option>
+                <option value="Open Now">Open Now</option>
+              </select>
             </div>
 
             <div class="special-features">
@@ -232,12 +244,12 @@ function Restaurants() {
             </div>
           </div>
         </div>
-        
+
         <div class="map-and-results">
-          <div id="map" style={{ height: "500px", width: "40%", marginTop: "52px" }}></div>
+          <h2 class="full-width">Our recommendations:</h2>
+          <div id="map" style={{ height: "500px", width: "45%", marginTop: "10px" }}></div>
 
           <div class="results">
-            <h2>Here you have our recommendations:</h2>
             <div class="results-boxes">
               {displayedRestaurants.length > 0 ? (
                 displayedRestaurants.map((restaurant, index) => (
@@ -247,7 +259,7 @@ function Restaurants() {
                     <p>📍 {restaurant.address.street_addr},</p> 
                     <p>{restaurant.address.city}</p>
                     <p>⭐ {restaurant.weighted_rating_value.toFixed(1)} ({restaurant.aggregated_rating_count} reviews)</p>
-                    <p>{"$".repeat(restaurant.dollar_signs)} - 🕒{restaurant.is_open ? "Yes" : "No"}</p>
+                    <p>{"$".repeat(restaurant.dollar_signs)} - 🕒{restaurant.is_open ? "Open Now" : "Not Open"}</p>
                   </div>
                 ))
               ) : (

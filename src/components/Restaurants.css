@@ -13,10 +13,28 @@
   .restaurants-page-title-div {
     text-align: center;
     width:90%;
+    margin-bottom: 50px;
+  }
+  
+  .mini-title p{
+    font-size: 15px;
+    font-weight: 400;
+    color: #fcca36;
   }
 
   .restaurants-page-title-div p{
-    font-size: 12px;
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    margin: 10px 0;
+
+  }
+  .restaurants-page-title-div h1 {
+    font-size: 45px;
+    font-weight: 800;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 
   .yellow-text {
@@ -24,8 +42,11 @@
   }
 
   .restaurants-div {
-    /*background-color:  rgba(252, 202, 54, 0.5);*/
+    background-color: rgba(252, 202, 54, 0.1);
     width: 90%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .location-form input{
@@ -47,10 +68,6 @@
     border-radius: 0px;
     background-color: #FCDA73;
     appearance: auto;
-  }
-
-  .location-form {
-    background-color: rgb(255, 255, 255);
   }
 
   .filter-options input{
@@ -92,6 +109,7 @@
     background-color: white;
     appearance: auto;
   }
+
   .restaurant-form button {
     width: 150px;
     margin: 5px;
@@ -101,6 +119,27 @@
     border-radius: 0px;
     background-color: #FCDA73;
     appearance: auto;
+  }
+
+  .restaurant-form-input {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .restaurant-form-input label {
+    margin-bottom: 0;
+    align-self: center;
+    width: min-content;
+    margin-right: 10px;
+  }
+
+  .restaurant-form-input input {
+    margin-right: 20px;
+  }
+
+  .restaurant-form-input-options {
+    display: flex;
+    flex-direction: row;
   }
 
   .special-features {
@@ -147,6 +186,13 @@
 .map-and-results {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    margin-top: 20px;
+}
+.full-width {
+    flex-basis: 100%;
 }
 
 .results{
@@ -166,6 +212,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .restaurant {
