@@ -15,10 +15,12 @@ function Restaurants() {
   const [cuisine, setCuisine] = useState("");
   const [distance, setDistance] = useState(5);
   const [budget, setBudget] = useState("");
+  const [budgetFilter, setBudgetFilter] = useState("Any Price");
   const [minRating, setMinRating] = useState("");
-  const [restaurantType, setRestaurantType] = useState("All");
+  const [minRatingFilter, setMinRatingFilter] = useState("Any Rating");
+  const [restaurantType, setRestaurantType] = useState("All Types");
   const [openingHours, setOpeningHours] = useState("Anytime");
-  const [specialFeatures, setSpecialFeatures] = useState({ delivery: false, outdoorSeating: false });
+  const [delivery, setDelivery] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [page, setPage] = useState(0);
   const [map, setMap] = useState(null);
@@ -109,11 +111,53 @@ function Restaurants() {
     fetchRestaurants();
   };
 
-  const displayedRestaurants = restaurants.slice(0, 4); //aixo
-  const handleFeatureChange = (feature) => {
-    setSpecialFeatures({ ...specialFeatures, [feature]: !specialFeatures[feature] });
-  };
-
+  const displayedRestaurants = restaurants
+    .filter(r => {
+      if (restaurantType === 'All Types') {
+        return true;
+      }
+      if (restaurantType === 'Vegan') {
+        return r.cuisines.includes("Vegan");
+      }
+      if (restaurantType === 'Gluten Free') {
+        return r.cuisines.includes("Gluten-Free");
+      }
+      if (restaurantType === 'Allergy Friendly') {
+        return r.cuisines.includes("Allergy Friendly");
+      }
+    })
+    .filter(r => {
+      if (minRatingFilter === 'Any Rating') {
+        return true;
+      }
+      if (minRatingFilter === '4+ Stars') {
+        return r.weighted_rating_value >= 4;
+      }
+      if (minRatingFilter === '5 Stars') {
+        console.log("minRatingFilter " + r.weighted_rating_value)
+        return r.weighted_rating_value >= 5;
+      }
+    })
+    .filter(r => {
+      if (budgetFilter === 'Any Price') {
+        return true;
+      }
+      if (budgetFilter === '$') {
+        return r.dollar_signs <= 1;
+      }
+      if (budgetFilter === '$$') {
+        return r.dollar_signs <= 2;
+      }
+      if (budgetFilter === '$$$') {
+        return r.dollar_signs <= 3;
+      }
+      if (budgetFilter === '$$$$') {
+        return r.dollar_signs <= 4;
+      }
+    })
+    .filter(r => openingHours === 'Anytime' ? true : r.is_open)
+    .filter(r => delivery ? r.delivery_enabled : true)
+    .slice(0, 4); //aixo
   return (
     <div>
       <div class="restaurants-page-title-div">
@@ -195,30 +239,30 @@ function Restaurants() {
             <div>
               <span class="filter-options">Restaurant Type</span>
               <select value={restaurantType} onChange={(e) => setRestaurantType(e.target.value)}>
-                <option value="All">All Types</option>
-                <option value="Fast Food">Fast Food</option>
-                <option value="Casual Dining">Casual Dining</option>
-                <option value="Fine Dining">Fine Dining</option>
+                <option value="All Types">All Types</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Gluten Free">Gluten Free</option>
+                <option value="Allergy Friendly">Allergy Friendly</option>
               </select>
             </div>
 
             <div>
               <span class="filter-options">Ratings</span>
-              <select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
-                <option value="0">Any Rating</option>
-                <option value="4">4+ Stars</option>
-                <option value="5">5 Stars</option>
+              <select value={minRatingFilter} onChange={(e) => setMinRatingFilter(e.target.value)}>
+                <option value="Any Rating">Any Rating</option>
+                <option value="4+ Stars">4+ Stars</option>
+                <option value="5 Stars">5 Stars</option>
               </select>
             </div>
 
             <div>
               <span class="filter-options">Price Range</span>
-              <select value={budget} onChange={(e) => setBudget(e.target.value)}>
-                <option value="">Any Price</option>
-                <option value="1">$</option>
-                <option value="2">$$</option>
-                <option value="3">$$$</option>
-                <option value="4">$$$$</option>
+              <select value={budgetFilter} onChange={(e) => setBudgetFilter(e.target.value)}>
+                <option value="Any Price">Any Price</option>
+                <option value="$">$</option>
+                <option value="$$">$$</option>
+                <option value="$$$">$$$</option>
+                <option value="$$$$">$$$$</option>
               </select>
             </div>
             
@@ -234,12 +278,8 @@ function Restaurants() {
               <span>Special Features</span>
               <div class="filter-options">
                 <label>
-                  <input type="checkbox" checked={specialFeatures.delivery} onChange={() => handleFeatureChange("delivery")} />
+                  <input type="checkbox" checked={delivery} onChange={() => setDelivery(!delivery)} />
                   Delivery
-                </label>
-                <label>
-                  <input type="checkbox" checked={specialFeatures.outdoorSeating} onChange={() => handleFeatureChange("outdoorSeating")} />
-                  Outdoor Seating
                 </label>
             </div>
           </div>
