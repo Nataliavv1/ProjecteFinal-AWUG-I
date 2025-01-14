@@ -1,0 +1,39 @@
+
+.title-container {
+    text-align: center; /* Centra el contenido horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.title-container h1 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #fcca36;
+    margin-bottom: 0; /* Elimina el espacio debajo del h1 */
+    margin-top: 50px;
+}
+
+.title-container h2 {
+    font-size: 45px;
+    font-weight: 800;
+    color: black;
+    margin-top: 5px; /* Elimina el espacio encima del h2 */
+    margin-bottom: 10px; /* Puedes ajustar este valor si prefieres más espacio debajo */
+}
+
+.title-container p {
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    margin: 10px 0;
+    margin-bottom: 50px;
+}
+
+/* Estilo para la palabra dentro del span */
+.title-container .highlighted-word {
+    color: #fcca36;
+    font-weight: 800;
+}

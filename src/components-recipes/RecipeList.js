@@ -21,8 +21,8 @@ function RecipeList() {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
   const { cart, addToCart, removeFromCart } = useCart();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  //const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-  const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
+  //const API_KEY = "540464a4610b4e4c9488d105323ad0af";
+  const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
   const URL = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=25`;
 
   const navigate = useNavigate();
@@ -52,35 +52,39 @@ function RecipeList() {
   const handleApplyFilters = (filters) => {
     let updatedRecipes = [...recipes];
 
-    if (filters.cuisine && filters.cuisine.length > 0) {
+    // Filtro por tipo de cocina
+    if (filters.cuisine && filters.cuisine.length > 0 && filters.cuisine[0] !== "Any Cuisine") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.cuisines && recipe.cuisines.some((cuisine) => filters.cuisine.includes(cuisine))
+        recipe.cuisines &&
+        recipe.cuisines.some((cuisine) => filters.cuisine.includes(cuisine))
       );
     }
 
-    if (filters.mealType && filters.mealType.length > 0) {
+    // Filtro por tipo de comida
+    if (filters.mealType && filters.mealType.length > 0 && filters.mealType[0] !== "Any Meal") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
         recipe.mealType && filters.mealType.includes(recipe.mealType)
       );
     }
 
-    if (filters.dietary && filters.dietary.length > 0) {
+    // Filtro por restricciones dietéticas
+    if (filters.dietary && filters.dietary.length > 0 && filters.dietary[0] !== "Any Dietary") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.dietary && recipe.dietary.some((diet) => filters.dietary.includes(diet))
+        recipe.dietary &&
+        recipe.dietary.some((diet) => filters.dietary.includes(diet))
       );
     }
 
-    if (filters.cookingTime && filters.cookingTime.length > 0) {
+    // Filtro por tiempo de preparación
+    if (filters.cookingTime && filters.cookingTime.length > 0 && filters.cookingTime[0] !== "Any Time") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.readyInMinutes && filters.cookingTime.includes(recipe.readyInMinutes)
+        recipe.readyInMinutes &&
+        filters.cookingTime.includes(recipe.readyInMinutes)
       );
     }
 
-    if (filters.difficulty && filters.difficulty.length > 0) {
-      updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.difficulty && filters.difficulty.includes(recipe.difficulty)
-      );
-    }
+    console.log("Filtros aplicados:", filters);
+    console.log("Recetas filtradas:", updatedRecipes);
 
     setFilteredRecipes(updatedRecipes);
     setCurrentPage(1);
@@ -204,10 +208,9 @@ function RecipeList() {
                         e.stopPropagation();
                         toggleSaveRecipe(recipe);
                       }}
-                      aria-label={
-                        favorites.some((fav) => fav.id === recipe.id)
-                          ? "Remove from saved recipes"
-                          : "Save recipe"
+                      aria-label={favorites.some((fav) => fav.id === recipe.id)
+                        ? "Remove from saved recipes"
+                        : "Save recipe"
                       }
                     >
                       <i
@@ -222,10 +225,9 @@ function RecipeList() {
                     <button
                       className="details-button1"
                       onClick={(e) => addToCartHandler(recipe, e)}
-                      aria-label={
-                        cart.some((item) => item.id === recipe.id)
-                          ? "Remove from cart"
-                          : "Add to cart"
+                      aria-label={cart.some((item) => item.id === recipe.id)
+                        ? "Remove from cart"
+                        : "Add to cart"
                       }
                     >
                       <i
@@ -238,7 +240,6 @@ function RecipeList() {
                     </button>
                   </div>
                 </div>
-                
               </div>
             ))}
         </div>

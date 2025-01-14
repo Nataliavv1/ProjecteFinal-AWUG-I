@@ -1,11 +1,18 @@
+
 .container-recipes {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .filters-container {
   margin-bottom: 20px;
+  width: 100%;
+  padding: 0;
 }
 
 /* Estilo para layout de recetas */
@@ -13,6 +20,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  
 }
 
 .recipe-list1 {
