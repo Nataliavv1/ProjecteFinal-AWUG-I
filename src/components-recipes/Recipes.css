@@ -427,3 +427,41 @@
     background-color: #ccc;
 }
 
+.filter {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: calc(100% / 5); 
+  min-width: 160px;
+}
+
+form {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.filters-form input{
+  width: 150px;
+  margin: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  background-color: white;
+  appearance: auto;
+}
+.filters-form button {
+  width: 150px;
+  height: 34.4px;
+  margin: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #FCDA73;
+  border-radius: 0px;
+  background-color: #FCDA73;
+  appearance: auto;
+  
+}
+form button{
+  width: 150px;
+}

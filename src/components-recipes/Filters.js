@@ -47,10 +47,10 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
           <label>Meal Type</label>
           <select name="mealType" onChange={handleChange}>
             <option value="Any Meal">Any Meal</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Dessert">Dessert</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="dessert">Dessert</option>
           </select>
         </div>
 
@@ -58,10 +58,10 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
           <label>Dietary Preferences</label>
           <select name="dietary" onChange={handleChange}>
             <option value="Any Dietary">Any Dietary</option>
-            <option value="Vegan">Vegan</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Gluten Free">Gluten Free</option>
-            <option value="Dairy Free">Dairy Free</option>
+            <option value="vegan">Vegan</option>
+            <option value="lacto ovo vegetarian">Vegetarian</option>
+            <option value="gluten free">Gluten Free</option>
+            <option value="dairy free">Dairy Free</option>
           </select>
         </div>
 
@@ -74,11 +74,10 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
             <option value="Over 60 min">Over 60 min</option>
           </select>
         </div>
-
-        <button type="submit">Apply Filters</button>
+        <button class="button" type="submit">Apply Filters</button>  
       </form>
 
-      <button onClick={onClearFilters}>Clear Filters</button>
+      <button class="button" onClick={onClearFilters}>Clear Filters</button>
     </div>
   );
 };

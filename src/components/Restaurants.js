@@ -5,8 +5,8 @@ import "./Restaurants.css";
 import markerIconImage from '../img/marker_map_icon.png';
 import Footer from "../components/Footer";
 
-const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-//const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
+//const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
+const API_KEY = "540464a4610b4e4c9488d105323ad0af"; // Usar esta cuando nos quedemos sin puntos en la otra
 
 function Restaurants() {
   const [city, setCity] = useState("");
@@ -319,10 +319,13 @@ function Restaurants() {
             <button onClick={() => setPage(page + 1)}>Next</button>
           </div>
         )}
-        
       </div>
-        {/* Añadimos el componente Footer */}
-        <Footer />
+      <div class="end-page-note">
+          <h3>Ready to enjoy?</h3>
+          <p>Now that you've found the perfect spot, it's time to enjoy! Whether you're dining out or ordering in, let TasteBuddy guide you to delicious meals nearby. Bon appétit!</p>
+      </div>
+      {/* Añadimos el componente Footer */}
+      <Footer />
     </div>
     
   ) 
