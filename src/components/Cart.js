@@ -15,7 +15,8 @@ const Cart = () => {
     const [readyTimes, setReadyTimes] = useState({});
     const navigate = useNavigate(); // Hook para la navegación
     //const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-    const API_KEY = '540464a4610b4e4c9488d105323ad0af'; // Usar esta cuando nos quedemos sin puntos en la otra
+    //const API_KEY = '540464a4610b4e4c9488d105323ad0af'; // Usar esta cuando nos quedemos sin puntos en la otra
+    const API_KEY = 'a797b5406ec54ebf950e8bb6af3eef5b';
 
     const fetchIngredientsForServings = async (recipeId, numberOfServings) => {
         const URL = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}`;

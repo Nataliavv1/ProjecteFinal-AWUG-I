@@ -25,7 +25,8 @@ function Recipes() {
   const { cart, addToCart, removeFromCart } = useCart();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   //const API_KEY = "d0fba68ef5204602ac929844f28b7d5f";
-  const API_KEY = '540464a4610b4e4c9488d105323ad0af';
+  //const API_KEY = '540464a4610b4e4c9488d105323ad0af';
+  const API_KEY = 'a797b5406ec54ebf950e8bb6af3eef5b';
   const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100`;
   const navigate = useNavigate();
 
