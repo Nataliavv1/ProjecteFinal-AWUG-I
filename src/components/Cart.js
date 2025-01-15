@@ -107,7 +107,6 @@ const Cart = () => {
                     [recipeId]: data.readyInMinutes,
                 }));
 
-                // Establecer las secciones como desplegadas al inicio
                 setExpand((prev) => ({
                     ...prev,
                     [recipeId]: {
@@ -127,9 +126,8 @@ const Cart = () => {
         });
     }, [cart]);
 
-    // Función para navegar a los detalles de la receta
     const goToRecipeDetails = (recipeId) => {
-        navigate(`/recipe/${recipeId}`, { state: { fromCart: true } }); // Pasamos el estado desde el carrito
+        navigate(`/recipe/${recipeId}`, { state: { fromCart: true } });
     };
 
     return (
@@ -143,7 +141,7 @@ const Cart = () => {
                         <li
                             key={recipe.id}
                             className="cart-item"
-                            onClick={() => goToRecipeDetails(recipe.id)} // Navegar al hacer clic en todo el contenedor
+                            onClick={() => goToRecipeDetails(recipe.id)}
                         >
                             <div className="recipe-header">
                                 <img src={recipe.image} alt={recipe.title} className="recipe-image" />
@@ -178,23 +176,40 @@ const Cart = () => {
                                         {recipe.readyInMinutes} minutes
                                     </h4>
                                     <div className="servings-control">
-                                        <button onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleServingsChange(recipe.id, -1);
-                                        }} disabled={servings[recipe.id] === 1}>-</button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleServingsChange(recipe.id, -1);
+                                            }}
+                                            disabled={servings[recipe.id] === 1}
+                                        >
+                                            -
+                                        </button>
                                         <span>Servings: {servings[recipe.id] || 1}</span>
-                                        <button onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleServingsChange(recipe.id, 1);
-                                        }}>+</button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleServingsChange(recipe.id, 1);
+                                            }}
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                     <div className="collapsible-section">
-                                        <h4 onClick={(e) => {
-                                            e.stopPropagation();
-                                            toggleExpand(recipe.id, "ingredients");
-                                        }}>
+                                        <h4
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleExpand(recipe.id, "ingredients");
+                                            }}
+                                        >
                                             Ingredients
-                                            <i className={`bx ${expand[recipe.id]?.ingredients ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+                                            <i
+                                                className={`bx ${
+                                                    expand[recipe.id]?.ingredients
+                                                        ? "bx-chevron-up"
+                                                        : "bx-chevron-down"
+                                                }`}
+                                            ></i>
                                         </h4>
                                         {expand[recipe.id]?.ingredients && (
                                             <ul className="ingredients-list">
@@ -202,25 +217,36 @@ const Cart = () => {
                                                     <li key={index}>
                                                         <input
                                                             type="checkbox"
-                                                            checked={purchasedIngredients[recipe.id]?.[index] || false}
-                                                            onChange={(e) => {
-                                                                e.stopPropagation();
-                                                                toggleIngredientPurchased(recipe.id, index);
-                                                            }}
+                                                            checked={
+                                                                purchasedIngredients[recipe.id]?.[index] || false
+                                                            }
+                                                            onClick={(e) => e.stopPropagation()} // Evitar propagación
+                                                            onChange={() =>
+                                                                toggleIngredientPurchased(recipe.id, index)
+                                                            }
                                                         />
-                                                        {ingredient.amount.toFixed(1)} {ingredient.unit} {ingredient.name}
+                                                        {ingredient.amount.toFixed(1)} {ingredient.unit}{" "}
+                                                        {ingredient.name}
                                                     </li>
                                                 ))}
                                             </ul>
                                         )}
                                     </div>
                                     <div className="collapsible-section">
-                                        <h4 onClick={(e) => {
-                                            e.stopPropagation();
-                                            toggleExpand(recipe.id, "steps");
-                                        }}>
+                                        <h4
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleExpand(recipe.id, "steps");
+                                            }}
+                                        >
                                             Steps
-                                            <i className={`bx ${expand[recipe.id]?.steps ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+                                            <i
+                                                className={`bx ${
+                                                    expand[recipe.id]?.steps
+                                                        ? "bx-chevron-up"
+                                                        : "bx-chevron-down"
+                                                }`}
+                                            ></i>
                                         </h4>
                                         {expand[recipe.id]?.steps && (
                                             <ol className="steps-list">
