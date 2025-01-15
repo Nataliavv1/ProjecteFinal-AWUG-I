@@ -35,7 +35,11 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
             <option value="Italian">Italian</option>
             <option value="Indian">Indian</option>
             <option value="Mexican">Mexican</option>
-            <option value="Chinese">Chinese</option>
+            <option value="Asian">Asian</option>
+            <option value="Mediterranian">Mediterranian</option>
+            <option value="German">German</option>
+            <option value="American">American</option>
+            <option value="Latin American">Latin American</option>
           </select>
         </div>
 
@@ -57,6 +61,7 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
             <option value="Vegan">Vegan</option>
             <option value="Vegetarian">Vegetarian</option>
             <option value="Gluten Free">Gluten Free</option>
+            <option value="Dairy Free">Dairy Free</option>
           </select>
         </div>
 

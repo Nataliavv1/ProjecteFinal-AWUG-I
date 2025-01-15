@@ -52,27 +52,42 @@ function RecipeList() {
   const handleApplyFilters = (filters) => {
     let updatedRecipes = [...recipes];
 
+    // no tiene sentido que los filtros sean arrays (solo se mira la primera posición)
+    // cuisines funciona correctamente
+    // mealType: no aparece en el contrato devuelto por la API (mirad docs por si os lo ha patillado el gpt)
+    // dietary: no es una propiedad como tal, hay varios booleanos (vegan, vegetarian...)
+    // readyInMinutes: el formato de los valores posibles del filtro no son compatibles con el valor entero del contrato 
+
     // Filtro por tipo de cocina
-    if (filters.cuisine && filters.cuisine.length > 0 && filters.cuisine[0] !== "Any Cuisine") {
+    if (filters.cuisines && filters.cuisines.length > 0 && filters.cuisines[0] !== "Any Cuisine") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
         recipe.cuisines &&
-        recipe.cuisines.some((cuisine) => filters.cuisine.includes(cuisine))
+        recipe.cuisines.some((cuisine) => filters.cuisines.includes(cuisine))
       );
     }
 
     // Filtro por tipo de comida
-    if (filters.mealType && filters.mealType.length > 0 && filters.mealType[0] !== "Any Meal") {
+    if (filters.dishTypes && filters.dishTypes.length > 0 && filters.dishTypes[0] !== "Any Meal") {
       updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.mealType && filters.mealType.includes(recipe.mealType)
+        recipe.dishTypes && filters.dishTypes.includes(recipe.dishTypes)
       );
     }
 
     // Filtro por restricciones dietéticas
-    if (filters.dietary && filters.dietary.length > 0 && filters.dietary[0] !== "Any Dietary") {
-      updatedRecipes = updatedRecipes.filter((recipe) =>
-        recipe.dietary &&
-        recipe.dietary.some((diet) => filters.dietary.includes(diet))
-      );
+    if (filters.diets && filters.diets.length > 0 && filters.diets[0] !== "Any diets") {
+      updatedRecipes = updatedRecipes.filter((recipe) =>{
+        if (!recipe.readyInMinutes) return false;
+    
+        const cookingTime = filters.cookingTime[0]; // Tomamos el valor seleccionado
+        if (cookingTime === "Under 30 min") {
+          return recipe.readyInMinutes < 30;
+        } else if (cookingTime === "30-60 min") {
+          return recipe.readyInMinutes >= 30 && recipe.readyInMinutes <= 60;
+        } else if (cookingTime === "Over 60 min") {
+          return recipe.readyInMinutes > 60;
+        }
+        return true;
+      });
     }
 
     // Filtro por tiempo de preparación
